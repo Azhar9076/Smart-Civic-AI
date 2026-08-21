@@ -1,0 +1,90 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: smart_civic
+      POSTGRES_USER: civic_admin
+      POSTGRES_PASSWORD: civic_secure_2026
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/app/db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./backend/app/db/seed_data.sql:/docker-entrypoint-initdb.d/02_seed.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U civic_admin -d smart_civic"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - civic_network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    networks:
+      - civic_network
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://civic_admin:civic_secure_2026@postgres:5432/smart_civic
+      REDIS_URL: redis://redis:6379/0
+      CORS_ORIGINS: "http://localhost:3000,http://127.0.0.1:3000,http://localhost:8000,http://127.0.0.1:8000"
+    networks:
+      - civic_network
+
+  celery_worker:
+    build:
+      context: ./backend
+    command: celery -A celery_app worker -l info -Q intake,priority,depth,verification,dedup
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      backend:
+        condition: service_started
+    environment:
+      DATABASE_URL: postgresql://civic_admin:civic_secure_2026@postgres:5432/smart_civic
+      REDIS_URL: redis://redis:6379/0
+    networks:
+      - civic_network
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8000/api/v1
+    networks:
+      - civic_network
+
+networks:
+  civic_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:

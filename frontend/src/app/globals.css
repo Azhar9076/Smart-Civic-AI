@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --canvas: #0d021a;
+    --purple-glow: #a855f7;
+    --fuchsia-glow: #d946ef;
+    --pink-glow: #ec4899;
+    --glass-bg: rgba(28, 10, 48, 0.25);
+    --glass-border: rgba(168, 85, 247, 0.30);
+    --glass-shadow: 0 8px 32px 0 rgba(13, 2, 26, 0.60);
+  }
+  body {
+    background-color: var(--canvas);
+    color: rgba(255, 255, 255, 0.92);
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(168, 85, 247, 0.4) #0d021a;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-purple-950/20 backdrop-blur-2xl border border-purple-500/30 rounded-2xl relative overflow-hidden transition-all duration-300;
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.15);
+  }
+  .glass-card:hover {
+    @apply border-fuchsia-400/50;
+    box-shadow: 0 0 40px rgba(217, 70, 239, 0.25);
+  }
+  .glass-reflection {
+    @apply absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-fuchsia-400/80 to-transparent pointer-events-none opacity-80;
+  }
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.35), 0 0 40px rgba(168, 85, 247, 0.15);
+  }
+  .glow-fuchsia {
+    box-shadow: 0 0 20px rgba(217, 70, 239, 0.35), 0 0 40px rgba(217, 70, 239, 0.15);
+  }
+  .glow-btn-purple {
+    @apply bg-purple-600/30 text-fuchsia-200 border border-fuchsia-400/40 hover:bg-purple-600/50 hover:text-white transition-all duration-300;
+    box-shadow: 0 0 15px rgba(217, 70, 239, 0.3);
+  }
+  .glow-btn-fuchsia {
+    @apply bg-fuchsia-500/25 text-fuchsia-200 border border-fuchsia-400/50 hover:bg-fuchsia-500/40 hover:text-white transition-all duration-300;
+    box-shadow: 0 0 20px rgba(217, 70, 239, 0.35);
+  }
+}
