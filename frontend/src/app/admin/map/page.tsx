@@ -4,7 +4,6 @@ import React, { useEffect, useState, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import 'leaflet/dist/leaflet.css';
 import GlassCard from '@/components/GlassCard';
-import GlowButton from '@/components/GlowButton';
 
 // Dynamic import with SSR disabled to prevent Leaflet window reference errors in Next.js App Router
 const MapContainer = dynamic(() => import('react-leaflet').then((m) => m.MapContainer), { ssr: false });
@@ -14,60 +13,60 @@ const Polygon = dynamic(() => import('react-leaflet').then((m) => m.Polygon), { 
 const Popup = dynamic(() => import('react-leaflet').then((m) => m.Popup), { ssr: false });
 const Tooltip = dynamic(() => import('react-leaflet').then((m) => m.Tooltip), { ssr: false });
 
-// Mumbai Metropolitan Coordinate Center
-const MUMBAI_CENTER: [number, number] = [19.0760, 72.8777];
+// Pune Municipal Corporation (PMC) Coordinate Center
+const PUNE_CENTER: [number, number] = [18.5204, 73.8567];
 
-// Authentic Ward Polygons GeoJSON representations
+// Authentic PMC Ward Polygons GeoJSON representations
 const WARDS_GEOJSON = [
   {
-    name: 'Ward A (Andheri / K-West)',
-    code: 'WARD-A',
-    department: 'Roads & Infrastructure - West',
+    name: 'PMC Ward-08 (Shivajinagar / Kothrud)',
+    code: 'PMC-WARD-08',
+    department: 'Roads & Infrastructure - Central Pune',
     activeTeams: 4,
-    slaHealth: '92%',
+    slaHealth: '96%',
     coordinates: [
-      [19.110, 72.830],
-      [19.110, 72.860],
-      [19.130, 72.860],
-      [19.130, 72.830],
+      [18.515, 73.820],
+      [18.515, 73.860],
+      [18.540, 73.860],
+      [18.540, 73.820],
     ] as [number, number][],
-    color: '#06B6D4'
+    color: '#d946ef'
   },
   {
-    name: 'Ward B (Bandra / H-West)',
-    code: 'WARD-B',
-    department: 'Water Supply & Drainage - West',
+    name: 'PMC Ward-15 (Hadapsar / Handewadi)',
+    code: 'PMC-WARD-15',
+    department: 'Water Supply & Drainage - East Pune',
     activeTeams: 3,
-    slaHealth: '88%',
+    slaHealth: '91%',
     coordinates: [
-      [19.045, 72.825],
-      [19.045, 72.855],
-      [19.065, 72.855],
-      [19.065, 72.825],
+      [18.485, 73.900],
+      [18.485, 73.950],
+      [18.520, 73.950],
+      [18.520, 73.900],
     ] as [number, number][],
-    color: '#10B981'
+    color: '#a855f7'
   },
   {
-    name: 'Ward C (Dadar / G-North)',
-    code: 'WARD-C',
-    department: 'Solid Waste Management - Central',
+    name: 'PMC Ward-04 (Viman Nagar / Kalyani Nagar)',
+    code: 'PMC-WARD-04',
+    department: 'Solid Waste & Urban Management - North Pune',
     activeTeams: 2,
-    slaHealth: '74%',
+    slaHealth: '84%',
     coordinates: [
-      [19.010, 72.835],
-      [19.010, 72.855],
-      [19.025, 72.855],
-      [19.025, 72.835],
+      [18.540, 73.885],
+      [18.540, 73.935],
+      [18.575, 73.935],
+      [18.575, 73.885],
     ] as [number, number][],
-    color: '#F59E0B'
+    color: '#ec4899'
   }
 ];
 
-// Active Municipal Teams
+// Active Pune Municipal Corporation Teams
 const MUNICIPAL_TEAMS = [
-  { id: 'TEAM-ROAD-A1', name: 'Road Rapid Unit A1', lat: 19.118, lng: 72.848, status: 'DISPATCHED', category: 'Pothole' },
-  { id: 'TEAM-WATER-B2', name: 'Hydraulic Team B2', lat: 19.052, lng: 72.838, status: 'EN_ROUTE', category: 'Water Leak' },
-  { id: 'TEAM-WASTE-C1', name: 'Solid Waste Crew C1', lat: 19.018, lng: 72.842, status: 'ON_SITE', category: 'Garbage' }
+  { id: 'PMC-ROAD-A1', name: 'PMC Road Rapid Squad A1 (Shivajinagar)', lat: 18.528, lng: 73.842, status: 'DISPATCHED', category: 'Pothole' },
+  { id: 'PMC-WATER-B2', name: 'PMC Hydraulic Team B2 (Hadapsar)', lat: 18.502, lng: 73.928, status: 'EN_ROUTE', category: 'Water Leak' },
+  { id: 'PMC-WASTE-C1', name: 'PMC Solid Waste Crew C1 (Viman Nagar)', lat: 18.558, lng: 73.912, status: 'ON_SITE', category: 'Garbage' }
 ];
 
 export default function AdminMapPage() {
@@ -81,19 +80,18 @@ export default function AdminMapPage() {
   useEffect(() => {
     setIsClient(true);
 
-    // Generate initial cases synchronized with seed data & spatial spread
+    // Initial cases for Pune Municipal Corporation
     const initialCases = [
-      { id: 'SCA-20260820-A1B2', lat: 19.119, lng: 72.846, category: 'Pothole', priority: 92.5, label: 'CRITICAL', slaRemaining: '18h', ward: 'WARD-A', depth: '0.085 m³' },
-      { id: 'SCA-20260820-C3D4', lat: 19.054, lng: 72.840, category: 'Water Leak', priority: 55.0, label: 'HIGH', slaRemaining: '38h', ward: 'WARD-B', depth: null },
-      { id: 'SCA-20260819-E5F6', lat: 19.018, lng: 72.844, category: 'Garbage', priority: 30.0, label: 'MEDIUM', slaRemaining: '46h', ward: 'WARD-C', depth: '0.250 m³' },
-      { id: 'SCA-20260820-G7H8', lat: 19.115, lng: 72.845, category: 'Street Light', priority: 70.0, label: 'HIGH', slaRemaining: '34h', ward: 'WARD-A', depth: null },
-      { id: 'SCA-20260820-I9J0', lat: 19.1192, lng: 72.8462, category: 'Pothole', priority: 85.0, label: 'CRITICAL', slaRemaining: '23h', ward: 'WARD-A', depth: '0.040 m³', isMasterLinked: true },
-      // Supplementary clustered points for realistic density heatmap
-      { id: 'SCA-20260820-101', lat: 19.121, lng: 72.849, category: 'Pothole', priority: 78.0, label: 'CRITICAL', slaRemaining: '12h', ward: 'WARD-A' },
-      { id: 'SCA-20260820-102', lat: 19.116, lng: 72.839, category: 'Road Damage', priority: 42.0, label: 'MEDIUM', slaRemaining: '52h', ward: 'WARD-A' },
-      { id: 'SCA-20260820-103', lat: 19.050, lng: 72.835, category: 'Water Leak', priority: 64.0, label: 'HIGH', slaRemaining: '28h', ward: 'WARD-B' },
-      { id: 'SCA-20260820-104', lat: 19.058, lng: 72.848, category: 'Drainage', priority: 81.0, label: 'CRITICAL', slaRemaining: '8h (BREACH IMMINENT)', ward: 'WARD-B' },
-      { id: 'SCA-20260820-105', lat: 19.014, lng: 72.849, category: 'Garbage', priority: 25.0, label: 'LOW', slaRemaining: '68h', ward: 'WARD-C' },
+      { id: 'SCA-20260821-P1A2', lat: 18.528, lng: 73.842, category: 'Pothole', priority: 92.5, label: 'CRITICAL', slaRemaining: '18h', ward: 'PMC Ward-08 (Shivajinagar)', depth: '0.085 m³' },
+      { id: 'SCA-20260821-P3B4', lat: 18.502, lng: 73.928, category: 'Water Leak', priority: 55.0, label: 'HIGH', slaRemaining: '38h', ward: 'PMC Ward-15 (Hadapsar)', depth: null },
+      { id: 'SCA-20260821-P5C6', lat: 18.558, lng: 73.912, category: 'Garbage', priority: 30.0, label: 'MEDIUM', slaRemaining: '46h', ward: 'PMC Ward-04 (Viman Nagar)', depth: '0.250 m³' },
+      { id: 'SCA-20260821-P7D8', lat: 18.508, lng: 73.815, category: 'Street Light', priority: 70.0, label: 'HIGH', slaRemaining: '34h', ward: 'PMC Ward-08 (Kothrud)', depth: null },
+      { id: 'SCA-20260821-P9E0', lat: 18.525, lng: 73.840, category: 'Pothole', priority: 85.0, label: 'CRITICAL', slaRemaining: '23h', ward: 'PMC Ward-08 (FC Road)', depth: '0.040 m³', isMasterLinked: true },
+      { id: 'SCA-20260821-101', lat: 18.530, lng: 73.845, category: 'Pothole', priority: 78.0, label: 'CRITICAL', slaRemaining: '12h', ward: 'PMC Ward-08' },
+      { id: 'SCA-20260821-102', lat: 18.522, lng: 73.835, category: 'Road Damage', priority: 42.0, label: 'MEDIUM', slaRemaining: '52h', ward: 'PMC Ward-08' },
+      { id: 'SCA-20260821-103', lat: 18.505, lng: 73.920, category: 'Water Leak', priority: 64.0, label: 'HIGH', slaRemaining: '28h', ward: 'PMC Ward-15' },
+      { id: 'SCA-20260821-104', lat: 18.514, lng: 73.931, category: 'Drainage', priority: 81.0, label: 'CRITICAL', slaRemaining: '8h', ward: 'PMC Ward-15' },
+      { id: 'SCA-20260821-105', lat: 18.562, lng: 73.918, category: 'Garbage', priority: 25.0, label: 'LOW', slaRemaining: '68h', ward: 'PMC Ward-04' },
     ];
 
     setCasePoints(initialCases);
@@ -109,24 +107,24 @@ export default function AdminMapPage() {
 
   if (!isClient) {
     return (
-      <div className="w-full h-full min-h-[85vh] flex items-center justify-center bg-[#090D16] text-white/70">
+      <div className="w-full h-full min-h-[85vh] flex items-center justify-center bg-[#0d021a] text-white">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
-          <span className="font-mono text-xs tracking-widest text-cyan-400">LOADING GIS SPATIAL ENGINE...</span>
+          <div className="w-8 h-8 border-2 border-fuchsia-400 border-t-transparent rounded-full animate-spin shadow-[0_0_15px_#d946ef]" />
+          <span className="font-mono text-xs tracking-widest text-fuchsia-200 font-bold">LOADING PUNE GIS SPATIAL GRID...</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="relative w-full h-[calc(100vh-64px)] overflow-hidden bg-[#090D16]">
+    <div className="relative w-full h-[calc(100vh-64px)] overflow-hidden bg-[#0d021a]">
       {/* Interactive Map */}
       <MapContainer
-        center={MUMBAI_CENTER}
+        center={PUNE_CENTER}
         zoom={12}
         zoomControl={false}
         className="w-full h-full z-0"
-        style={{ background: '#090D16' }}
+        style={{ background: '#0d021a' }}
       >
         <TileLayer
           attribution='&copy; <a href="https://carto.com/">CartoDB DarkMatter</a>'
@@ -142,16 +140,16 @@ export default function AdminMapPage() {
               pathOptions={{
                 color: ward.color,
                 fillColor: ward.color,
-                fillOpacity: 0.08,
-                weight: 1.5,
+                fillOpacity: 0.1,
+                weight: 2,
                 dashArray: '6, 6'
               }}
             >
-              <Tooltip sticky direction="top" className="glass-tooltip">
-                <div className="bg-slate-900/90 text-white p-2 rounded border border-cyan-500/30 text-xs font-mono">
-                  <div className="font-bold text-cyan-400">{ward.name}</div>
-                  <div className="text-white/70">Dept: {ward.department}</div>
-                  <div className="text-emerald-400">SLA Health: {ward.slaHealth}</div>
+              <Tooltip sticky direction="top">
+                <div className="bg-[#120424] text-white p-3 rounded-xl border border-purple-500/50 text-xs font-mono shadow-xl">
+                  <div className="font-bold text-fuchsia-200 text-sm">{ward.name}</div>
+                  <div className="text-purple-100 font-medium">Dept: {ward.department}</div>
+                  <div className="text-emerald-300 font-bold">SLA Health: {ward.slaHealth}</div>
                 </div>
               </Tooltip>
             </Polygon>
@@ -159,20 +157,20 @@ export default function AdminMapPage() {
 
         {/* Live Heatmap / Incidents Markers */}
         {filteredPoints.map((pt) => {
-          let color = '#06B6D4'; // LOW
+          let color = '#a855f7'; // LOW
           let radius = 6;
           let opacity = 0.5;
 
           if (pt.label === 'CRITICAL') {
-            color = '#EF4444';
+            color = '#ec4899';
             radius = 12;
-            opacity = 0.85;
+            opacity = 0.9;
           } else if (pt.label === 'HIGH') {
-            color = '#F97316';
+            color = '#d946ef';
             radius = 9;
-            opacity = 0.7;
+            opacity = 0.75;
           } else if (pt.label === 'MEDIUM') {
-            color = '#EAB308';
+            color = '#c084fc';
             radius = 7;
             opacity = 0.6;
           }
@@ -190,16 +188,16 @@ export default function AdminMapPage() {
                 dashArray: pt.isMasterLinked ? '2, 2' : undefined
               }}
             >
-              <Popup className="glass-leaflet-popup">
-                <div className="bg-slate-950/95 text-white p-4 rounded-xl border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.8)] min-w-[240px]">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
-                    <span className="font-mono text-cyan-400 font-bold text-xs">{pt.id}</span>
+              <Popup>
+                <div className="bg-[#120424] text-white p-4 rounded-xl border border-purple-500/50 shadow-[0_10px_30px_rgba(0,0,0,0.8)] min-w-[240px]">
+                  <div className="flex items-center justify-between border-b border-purple-500/30 pb-2 mb-2">
+                    <span className="font-mono text-fuchsia-200 font-bold text-xs">{pt.id}</span>
                     <span 
                       className="text-[10px] font-bold px-2 py-0.5 rounded-full"
                       style={{ 
-                        backgroundColor: `${color}20`,
+                        backgroundColor: `${color}25`,
                         color: color,
-                        border: `1px solid ${color}40`
+                        border: `1px solid ${color}50`
                       }}
                     >
                       {pt.label} ({pt.priority})
@@ -208,35 +206,35 @@ export default function AdminMapPage() {
 
                   <div className="space-y-1 text-xs mb-3">
                     <div className="flex justify-between">
-                      <span className="text-white/50">Category:</span>
-                      <span className="font-medium text-white/90">{pt.category}</span>
+                      <span className="text-purple-200">Category:</span>
+                      <span className="font-bold text-white">{pt.category}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-white/50">Jurisdiction:</span>
-                      <span className="font-mono text-cyan-300">{pt.ward}</span>
+                      <span className="text-purple-200">Jurisdiction:</span>
+                      <span className="font-mono text-fuchsia-200 font-semibold">{pt.ward}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-white/50">SLA Due In:</span>
-                      <span className="font-mono text-emerald-400 font-semibold">{pt.slaRemaining}</span>
+                      <span className="text-purple-200">SLA Due In:</span>
+                      <span className="font-mono text-emerald-300 font-bold">{pt.slaRemaining}</span>
                     </div>
                     {pt.depth && (
                       <div className="flex justify-between">
-                        <span className="text-white/50">Depth AI Est:</span>
-                        <span className="font-mono text-amber-300 font-semibold">{pt.depth}</span>
+                        <span className="text-purple-200">Depth AI Est:</span>
+                        <span className="font-mono text-amber-300 font-bold">{pt.depth}</span>
                       </div>
                     )}
                     {pt.isMasterLinked && (
-                      <div className="text-[10px] text-cyan-400 bg-cyan-950/60 p-1 rounded border border-cyan-800/60 mt-1">
-                        ★ Merged with Master Pothole Case
+                      <div className="text-[10px] text-fuchsia-200 bg-purple-950/60 p-1 rounded border border-purple-500/40 mt-1 font-mono font-bold">
+                        ★ Merged with Master Incident Record
                       </div>
                     )}
                   </div>
 
                   <a 
-                    href={`/admin/cases?id=${pt.id}`}
-                    className="block text-center text-xs w-full py-1.5 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 rounded-lg transition-all font-medium"
+                    href={`/admin?tab=cases&id=${pt.id}`}
+                    className="block text-center text-xs w-full py-2 bg-purple-600/40 hover:bg-purple-600/60 text-white border border-fuchsia-400/50 rounded-xl transition-all font-bold"
                   >
-                    Open Case Investigation →
+                    Open Investigation →
                   </a>
                 </div>
               </Popup>
@@ -252,14 +250,14 @@ export default function AdminMapPage() {
               center={[team.lat, team.lng]}
               radius={8}
               pathOptions={{
-                color: '#10B981',
-                fillColor: '#10B981',
-                fillOpacity: 0.9,
+                color: '#10b981',
+                fillColor: '#10b981',
+                fillOpacity: 0.95,
                 weight: 2
               }}
             >
-              <Tooltip permanent={false} direction="top">
-                <div className="bg-slate-900 text-emerald-300 text-xs font-mono p-1 rounded border border-emerald-500/40">
+              <Tooltip direction="top">
+                <div className="bg-[#120424] text-emerald-200 text-xs font-mono p-1.5 rounded-lg border border-emerald-500/50 font-bold">
                   ⚡ {team.name} ({team.status})
                 </div>
               </Tooltip>
@@ -269,24 +267,24 @@ export default function AdminMapPage() {
 
       {/* Floating Control & Filter Glass Panel */}
       <div className="absolute top-6 left-6 z-10 w-84 space-y-4 pointer-events-none">
-        <GlassCard padding="sm" className="pointer-events-auto shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
-          <div className="flex items-center justify-between mb-3 border-b border-white/10 pb-2">
+        <GlassCard padding="sm" className="pointer-events-auto shadow-[0_8px_32px_0_rgba(0,0,0,0.6)] bg-[#0d021a]/95 border-purple-500/50">
+          <div className="flex items-center justify-between mb-3 border-b border-purple-500/30 pb-2">
             <h3 className="font-bold text-white text-sm flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-              GIS Spatial Intelligence
+              <span className="w-2 h-2 rounded-full bg-fuchsia-400 animate-ping" />
+              PMC Pune Spatial Intelligence
             </h3>
-            <span className="text-[10px] font-mono text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800">
-              ST_Contains ACTIVE
+            <span className="text-[10px] font-mono text-fuchsia-300 bg-purple-950/70 px-2 py-0.5 rounded border border-purple-500/40 font-bold">
+              PMC PostGIS ACTIVE
             </span>
           </div>
 
           <div className="space-y-2.5 text-xs">
             <div>
-              <label className="text-white/60 block mb-1">Issue Category</label>
+              <label className="text-purple-200 block mb-1 font-medium">Issue Category</label>
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full bg-slate-900/80 border border-white/10 rounded-lg px-3 py-1.5 text-white/90 outline-none focus:border-cyan-500/50"
+                className="w-full bg-purple-950/70 border border-purple-500/40 rounded-lg px-3 py-1.5 text-white outline-none focus:border-fuchsia-400/70"
               >
                 <option value="ALL">All Categories ({casePoints.length})</option>
                 <option value="Pothole">Pothole</option>
@@ -298,13 +296,13 @@ export default function AdminMapPage() {
             </div>
 
             <div>
-              <label className="text-white/60 block mb-1">Explainable Priority</label>
+              <label className="text-purple-200 block mb-1 font-medium">Priority Rating</label>
               <select
                 value={selectedPriority}
                 onChange={(e) => setSelectedPriority(e.target.value)}
-                className="w-full bg-slate-900/80 border border-white/10 rounded-lg px-3 py-1.5 text-white/90 outline-none focus:border-cyan-500/50"
+                className="w-full bg-purple-950/70 border border-purple-500/40 rounded-lg px-3 py-1.5 text-white outline-none focus:border-fuchsia-400/70"
               >
-                <option value="ALL">All Severity Levels</option>
+                <option value="ALL">All Priority Levels</option>
                 <option value="CRITICAL">Critical (Score 75-100)</option>
                 <option value="HIGH">High (Score 50-75)</option>
                 <option value="MEDIUM">Medium (Score 25-50)</option>
@@ -312,68 +310,53 @@ export default function AdminMapPage() {
               </select>
             </div>
 
-            <div className="pt-2 border-t border-white/10 flex items-center justify-between">
-              <label className="flex items-center gap-2 cursor-pointer text-white/80">
+            <div className="pt-2 border-t border-purple-500/30 flex items-center justify-between">
+              <label className="flex items-center gap-2 cursor-pointer text-purple-100 font-medium">
                 <input
                   type="checkbox"
                   checked={showWards}
                   onChange={(e) => setShowWards(e.target.checked)}
-                  className="rounded bg-slate-800 border-white/20 text-cyan-500 focus:ring-0"
+                  className="rounded bg-purple-950 border-purple-500/40 text-fuchsia-500 focus:ring-0"
                 />
                 Ward Boundaries
               </label>
 
-              <label className="flex items-center gap-2 cursor-pointer text-white/80">
+              <label className="flex items-center gap-2 cursor-pointer text-purple-100 font-medium">
                 <input
                   type="checkbox"
                   checked={showTeams}
                   onChange={(e) => setShowTeams(e.target.checked)}
-                  className="rounded bg-slate-800 border-white/20 text-emerald-500 focus:ring-0"
+                  className="rounded bg-purple-950 border-purple-500/40 text-emerald-500 focus:ring-0"
                 />
-                Field Units
+                Field Squads
               </label>
             </div>
           </div>
         </GlassCard>
 
         {/* Heatmap Legend */}
-        <GlassCard padding="sm" className="pointer-events-auto">
-          <div className="text-[11px] font-semibold text-white/50 uppercase tracking-wider mb-2">Priority Heatmap Legend</div>
+        <GlassCard padding="sm" className="pointer-events-auto bg-[#0d021a]/95 border-purple-500/50">
+          <div className="text-[11px] font-bold text-purple-200 uppercase tracking-wider mb-2">Priority Heatmap Legend</div>
           <div className="grid grid-cols-2 gap-2 text-xs">
-            <div className="flex items-center gap-2 text-white/80">
-              <div className="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_8px_#EF4444]" />
+            <div className="flex items-center gap-2 text-purple-100">
+              <div className="w-3 h-3 rounded-full bg-pink-500 shadow-[0_0_8px_#ec4899]" />
               <span>Critical (24h SLA)</span>
             </div>
-            <div className="flex items-center gap-2 text-white/80">
-              <div className="w-3 h-3 rounded-full bg-orange-500" />
+            <div className="flex items-center gap-2 text-purple-100">
+              <div className="w-3 h-3 rounded-full bg-fuchsia-500" />
               <span>High (48h SLA)</span>
             </div>
-            <div className="flex items-center gap-2 text-white/80">
-              <div className="w-3 h-3 rounded-full bg-yellow-500" />
+            <div className="flex items-center gap-2 text-purple-100">
+              <div className="w-3 h-3 rounded-full bg-purple-500" />
               <span>Medium (72h SLA)</span>
             </div>
-            <div className="flex items-center gap-2 text-white/80">
-              <div className="w-3 h-3 rounded-full bg-cyan-500" />
-              <span>Low (Standard)</span>
+            <div className="flex items-center gap-2 text-purple-100">
+              <div className="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]" />
+              <span>Active Field Squad</span>
             </div>
           </div>
         </GlassCard>
       </div>
-
-      {/* Global override styling for Leaflet Dark Glass Integration */}
-      <style jsx global>{`
-        .leaflet-popup-content-wrapper {
-          background: transparent !important;
-          box-shadow: none !important;
-          padding: 0 !important;
-        }
-        .leaflet-popup-tip-container {
-          display: none !important;
-        }
-        .leaflet-popup-content {
-          margin: 0 !important;
-        }
-      `}</style>
     </div>
   );
 }
