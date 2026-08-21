@@ -75,13 +75,13 @@ const MUNICIPAL_TEAMS = [
 
 // Sample cases list for Pune
 const INITIAL_CASES = [
-  { id: 'SCA-20260821-P1A2', category: 'Pothole', ward: 'PMC Ward-08 (Shivajinagar)', priority: 92.5, label: 'CRITICAL', status: 'assigned', slaDueAt: new Date(Date.now() + 18 * 3600000).toISOString(), assignedTo: 'PMC Road Rapid Squad A1', lat: 18.528, lng: 73.842, depth: '0.085 m³' },
-  { id: 'SCA-20260821-P3B4', category: 'Water Leak', ward: 'PMC Ward-15 (Hadapsar)', priority: 55.0, label: 'HIGH', status: 'in_progress', slaDueAt: new Date(Date.now() + 38 * 3600000).toISOString(), assignedTo: 'PMC Hydraulic Team B2', lat: 18.502, lng: 73.928, depth: null },
-  { id: 'SCA-20260821-P5C6', category: 'Garbage', ward: 'PMC Ward-04 (Viman Nagar)', priority: 30.0, label: 'MEDIUM', status: 'submitted', slaDueAt: new Date(Date.now() + 46 * 3600000).toISOString(), assignedTo: 'Unassigned', lat: 18.558, lng: 73.912, depth: '0.250 m³' },
-  { id: 'SCA-20260821-P7D8', category: 'Street Light', ward: 'PMC Ward-08 (Kothrud)', priority: 70.0, label: 'HIGH', status: 'assigned', slaDueAt: new Date(Date.now() + 34 * 3600000).toISOString(), assignedTo: 'PMC Lighting Crew 2', lat: 18.508, lng: 73.815, depth: null },
-  { id: 'SCA-20260821-P9E0', category: 'Pothole', ward: 'PMC Ward-08 (FC Road)', priority: 85.0, label: 'CRITICAL', status: 'verification_pending', slaDueAt: new Date(Date.now() + 23 * 3600000).toISOString(), assignedTo: 'PMC Road Rapid Squad A1', lat: 18.525, lng: 73.840, depth: '0.040 m³', isMasterLinked: true },
-  { id: 'SCA-20260821-P1F2', category: 'Drainage', ward: 'PMC Ward-15 (Magarpatta)', priority: 81.0, label: 'CRITICAL', status: 'in_progress', slaDueAt: new Date(Date.now() + 4 * 3600000).toISOString(), assignedTo: 'PMC Drainage Unit 3', lat: 18.514, lng: 73.931, depth: null },
-  { id: 'SCA-20260821-P3G4', category: 'Road Damage', ward: 'PMC Ward-04 (Kalyani Nagar)', priority: 42.0, label: 'MEDIUM', status: 'submitted', slaDueAt: new Date(Date.now() + 52 * 3600000).toISOString(), assignedTo: 'Unassigned', lat: 18.548, lng: 73.903, depth: null },
+  { id: 'SCA-20260821-P1A2', category: 'Pothole', ward: 'PMC Ward-08 (Shivajinagar)', priority: 92.5, label: 'CRITICAL', status: 'assigned', slaDueAt: new Date(Date.now() + 18 * 3600000).toISOString(), assignedTo: 'PMC Road Rapid Squad A1', lat: 18.528, lng: 73.842, depth: '0.085 m³', sha: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' },
+  { id: 'SCA-20260821-P3B4', category: 'Water Leak', ward: 'PMC Ward-15 (Hadapsar)', priority: 55.0, label: 'HIGH', status: 'in_progress', slaDueAt: new Date(Date.now() + 38 * 3600000).toISOString(), assignedTo: 'PMC Hydraulic Team B2', lat: 18.502, lng: 73.928, depth: null, sha: '8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4' },
+  { id: 'SCA-20260821-P5C6', category: 'Garbage', ward: 'PMC Ward-04 (Viman Nagar)', priority: 30.0, label: 'MEDIUM', status: 'submitted', slaDueAt: new Date(Date.now() + 46 * 3600000).toISOString(), assignedTo: 'Unassigned', lat: 18.558, lng: 73.912, depth: '0.250 m³', sha: 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb' },
+  { id: 'SCA-20260821-P7D8', category: 'Street Light', ward: 'PMC Ward-08 (Kothrud)', priority: 70.0, label: 'HIGH', status: 'assigned', slaDueAt: new Date(Date.now() + 34 * 3600000).toISOString(), assignedTo: 'PMC Lighting Crew 2', lat: 18.508, lng: 73.815, depth: null, sha: 'fb8e20fc2e4c3f248c60c39bd652f3c1347298ab97b8b24d79a2798e0964177b' },
+  { id: 'SCA-20260821-P9E0', category: 'Pothole', ward: 'PMC Ward-08 (FC Road)', priority: 85.0, label: 'CRITICAL', status: 'verification_pending', slaDueAt: new Date(Date.now() + 23 * 3600000).toISOString(), assignedTo: 'PMC Road Rapid Squad A1', lat: 18.525, lng: 73.840, depth: '0.040 m³', isMasterLinked: true, sha: '323982c8947d29ca4a8497d3910c6607421f1d17d59828faadba92f0dc3a19b8' },
+  { id: 'SCA-20260821-P1F2', category: 'Drainage', ward: 'PMC Ward-15 (Magarpatta)', priority: 81.0, label: 'CRITICAL', status: 'in_progress', slaDueAt: new Date(Date.now() + 4 * 3600000).toISOString(), assignedTo: 'PMC Drainage Unit 3', lat: 18.514, lng: 73.931, depth: null, sha: '9f83c60517b4d0ad729171326507b942a49f89f9d1404c1f454d95b4d4b1267f' },
+  { id: 'SCA-20260821-P3G4', category: 'Road Damage', ward: 'PMC Ward-04 (Kalyani Nagar)', priority: 42.0, label: 'MEDIUM', status: 'submitted', slaDueAt: new Date(Date.now() + 52 * 3600000).toISOString(), assignedTo: 'Unassigned', lat: 18.548, lng: 73.903, depth: null, sha: '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b' },
 ];
 
 export default function AdminDashboardPage() {
@@ -206,105 +206,159 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Top Header Navigation Bar */}
-      <header className="w-full bg-purple-950/30 backdrop-blur-2xl border-b border-purple-500/30 px-6 sm:px-8 py-5 flex items-center justify-between z-20 shadow-[0_4px_30px_rgba(13,2,26,0.6)]">
-        <div className="flex items-center gap-4">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-600 to-fuchsia-500 flex items-center justify-center shadow-[0_0_20px_rgba(217,70,239,0.5)] border border-fuchsia-300/50">
-            <span className="text-2xl">🏛️</span>
+      <header className="w-full bg-purple-950/40 backdrop-blur-2xl border-b border-purple-500/30 px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex items-center justify-between z-20 shadow-[0_4px_30px_rgba(13,2,26,0.7)]">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-purple-600 to-fuchsia-500 flex items-center justify-center shadow-[0_0_20px_rgba(217,70,239,0.5)] border border-fuchsia-300/50 shrink-0">
+            <span className="text-xl sm:text-2xl">🏛️</span>
           </div>
-          <div>
-            <h1 className="text-xl sm:text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white via-fuchsia-100 to-purple-200 tracking-tight">
+          <div className="min-w-0">
+            <h1 className="text-lg sm:text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white via-fuchsia-100 to-purple-200 tracking-tight truncate">
               Smart Civic AI — Pune Municipal Console
             </h1>
-            <p className="text-xs sm:text-sm font-mono text-purple-200 font-medium flex items-center gap-2 mt-0.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981]" />
+            <p className="text-xs sm:text-sm font-mono text-purple-200 font-medium flex items-center gap-2 mt-0.5 truncate">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981] shrink-0" />
               PMC PostGIS Spatial Engine & LangGraph Agent Network Online
             </p>
           </div>
         </div>
 
         {/* Global Action & Copilot Trigger */}
-        <div className="flex items-center gap-3">
-          <div className="hidden lg:flex items-center gap-2 bg-purple-950/60 border border-purple-500/40 px-4 py-2 rounded-xl text-sm font-mono text-purple-100 shadow-sm">
+        <div className="flex items-center gap-3 shrink-0">
+          <div className="hidden lg:flex items-center gap-2 bg-purple-950/70 border border-purple-500/40 px-4 py-2 rounded-xl text-sm font-mono text-purple-100 shadow-sm">
             <span>PMC Grid:</span>
             <span className="text-fuchsia-300 font-bold">15 Wards Active</span>
           </div>
 
           <button
             onClick={() => { setSelectedCase('SCA-20260821-P1A2'); setCopilotOpen(true); }}
-            className="glow-btn-fuchsia px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2"
+            className="glow-btn-fuchsia px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2"
           >
             <span className="text-base">✨</span>
-            <span>AI Copilot</span>
+            <span className="hidden sm:inline">AI Copilot</span>
           </button>
         </div>
       </header>
 
-      {/* Main Admin Dashboard Container with Non-Shrinking Sidebar and Flexible Main Panel */}
-      <div className="max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col lg:flex-row gap-6 w-full items-start overflow-hidden relative z-10">
+      {/* Main Admin Dashboard Container with Responsive Layout Manager */}
+      <div className="flex flex-col lg:flex-row gap-6 w-full items-start overflow-hidden max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 relative z-10 box-border">
         
-        {/* Left Navigation Sidebar with Fixed Width and High Contrast */}
+        {/* Navigation Panel: Smooth Horizontal Scroll on Mobile (<1024px) / Fixed Vertical Sidebar on Desktop (>=1024px) */}
         <aside className="w-full lg:w-64 shrink-0">
-          <GlassCard padding="sm" className="space-y-3 sticky top-6 border-purple-500/35">
-            <div className="px-3 py-2 text-xs font-mono uppercase tracking-widest text-purple-200 font-bold border-b border-purple-500/30 mb-2">
-              Municipal Console
-            </div>
+          {/* Desktop Sidebar Panel */}
+          <div className="hidden lg:block">
+            <GlassCard padding="sm" className="space-y-3 sticky top-6 border-purple-500/35 bg-[#0d021a]/90">
+              <div className="px-3 py-2 text-xs font-mono uppercase tracking-widest text-purple-200 font-bold border-b border-purple-500/30 mb-2">
+                Municipal Console
+              </div>
 
-            {/* Tab 1: Overview */}
+              {/* Tab 1: Overview */}
+              <button
+                onClick={() => setActiveTab('overview')}
+                className={`w-full flex items-center gap-3.5 px-5 py-3.5 rounded-xl text-sm tracking-wide transition-all duration-300 ${
+                  activeTab === 'overview'
+                    ? 'bg-purple-600/40 text-white border border-fuchsia-400/60 shadow-[0_0_18px_rgba(217,70,239,0.35)] font-bold'
+                    : 'text-purple-200 hover:text-white hover:bg-purple-900/30 border border-transparent font-medium'
+                }`}
+              >
+                <span className="text-lg">📊</span>
+                <span>Overview</span>
+              </button>
+
+              {/* Tab 2: Live Map */}
+              <button
+                onClick={() => setActiveTab('map')}
+                className={`w-full flex items-center gap-3.5 px-5 py-3.5 rounded-xl text-sm tracking-wide transition-all duration-300 ${
+                  activeTab === 'map'
+                    ? 'bg-purple-600/40 text-white border border-fuchsia-400/60 shadow-[0_0_18px_rgba(217,70,239,0.35)] font-bold'
+                    : 'text-purple-200 hover:text-white hover:bg-purple-900/30 border border-transparent font-medium'
+                }`}
+              >
+                <span className="text-lg">🗺️</span>
+                <span>Live Map</span>
+              </button>
+
+              {/* Tab 3: Cases */}
+              <button
+                onClick={() => setActiveTab('cases')}
+                className={`w-full flex items-center gap-3.5 px-5 py-3.5 rounded-xl text-sm tracking-wide transition-all duration-300 ${
+                  activeTab === 'cases'
+                    ? 'bg-purple-600/40 text-white border border-fuchsia-400/60 shadow-[0_0_18px_rgba(217,70,239,0.35)] font-bold'
+                    : 'text-purple-200 hover:text-white hover:bg-purple-900/30 border border-transparent font-medium'
+                }`}
+              >
+                <span className="text-lg">📁</span>
+                <span>Cases Management</span>
+              </button>
+
+              {/* Tab 4: Multi-Agent System */}
+              <button
+                onClick={() => setActiveTab('agents')}
+                className={`w-full flex items-center gap-3.5 px-5 py-3.5 rounded-xl text-sm tracking-wide transition-all duration-300 ${
+                  activeTab === 'agents'
+                    ? 'bg-purple-600/40 text-white border border-fuchsia-400/60 shadow-[0_0_18px_rgba(217,70,239,0.35)] font-bold'
+                    : 'text-purple-200 hover:text-white hover:bg-purple-900/30 border border-transparent font-medium'
+                }`}
+              >
+                <span className="text-lg">🤖</span>
+                <span>Multi-Agent System</span>
+                <span className="ml-auto w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981]" />
+              </button>
+            </GlassCard>
+          </div>
+
+          {/* Mobile/Tablet Horizontal Scrollable Tab Bar */}
+          <div className="lg:hidden w-full flex flex-row overflow-x-auto gap-2 pb-2 scrollbar-none">
             <button
               onClick={() => setActiveTab('overview')}
-              className={`w-full flex items-center gap-3.5 px-5 py-3.5 rounded-xl text-sm tracking-wide transition-all duration-300 ${
+              className={`shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
                 activeTab === 'overview'
-                  ? 'bg-purple-600/40 text-white border border-fuchsia-400/60 shadow-[0_0_18px_rgba(217,70,239,0.35)] font-bold'
-                  : 'text-purple-200 hover:text-white hover:bg-purple-900/30 border border-transparent font-medium'
+                  ? 'bg-purple-600/50 text-white border border-fuchsia-400/60 shadow-[0_0_12px_rgba(217,70,239,0.35)]'
+                  : 'bg-purple-950/60 text-purple-200 border border-purple-500/30'
               }`}
             >
-              <span className="text-lg">📊</span>
+              <span>📊</span>
               <span>Overview</span>
             </button>
 
-            {/* Tab 2: Live Map */}
             <button
               onClick={() => setActiveTab('map')}
-              className={`w-full flex items-center gap-3.5 px-5 py-3.5 rounded-xl text-sm tracking-wide transition-all duration-300 ${
+              className={`shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
                 activeTab === 'map'
-                  ? 'bg-purple-600/40 text-white border border-fuchsia-400/60 shadow-[0_0_18px_rgba(217,70,239,0.35)] font-bold'
-                  : 'text-purple-200 hover:text-white hover:bg-purple-900/30 border border-transparent font-medium'
+                  ? 'bg-purple-600/50 text-white border border-fuchsia-400/60 shadow-[0_0_12px_rgba(217,70,239,0.35)]'
+                  : 'bg-purple-950/60 text-purple-200 border border-purple-500/30'
               }`}
             >
-              <span className="text-lg">🗺️</span>
+              <span>🗺️</span>
               <span>Live Map</span>
             </button>
 
-            {/* Tab 3: Cases */}
             <button
               onClick={() => setActiveTab('cases')}
-              className={`w-full flex items-center gap-3.5 px-5 py-3.5 rounded-xl text-sm tracking-wide transition-all duration-300 ${
+              className={`shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
                 activeTab === 'cases'
-                  ? 'bg-purple-600/40 text-white border border-fuchsia-400/60 shadow-[0_0_18px_rgba(217,70,239,0.35)] font-bold'
-                  : 'text-purple-200 hover:text-white hover:bg-purple-900/30 border border-transparent font-medium'
+                  ? 'bg-purple-600/50 text-white border border-fuchsia-400/60 shadow-[0_0_12px_rgba(217,70,239,0.35)]'
+                  : 'bg-purple-950/60 text-purple-200 border border-purple-500/30'
               }`}
             >
-              <span className="text-lg">📁</span>
-              <span>Cases Management</span>
+              <span>📁</span>
+              <span>Cases</span>
             </button>
 
-            {/* Tab 4: Multi-Agent System */}
             <button
               onClick={() => setActiveTab('agents')}
-              className={`w-full flex items-center gap-3.5 px-5 py-3.5 rounded-xl text-sm tracking-wide transition-all duration-300 ${
+              className={`shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
                 activeTab === 'agents'
-                  ? 'bg-purple-600/40 text-white border border-fuchsia-400/60 shadow-[0_0_18px_rgba(217,70,239,0.35)] font-bold'
-                  : 'text-purple-200 hover:text-white hover:bg-purple-900/30 border border-transparent font-medium'
+                  ? 'bg-purple-600/50 text-white border border-fuchsia-400/60 shadow-[0_0_12px_rgba(217,70,239,0.35)]'
+                  : 'bg-purple-950/60 text-purple-200 border border-purple-500/30'
               }`}
             >
-              <span className="text-lg">🤖</span>
+              <span>🤖</span>
               <span>Multi-Agent System</span>
-              <span className="ml-auto w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981]" />
             </button>
-          </GlassCard>
+          </div>
         </aside>
 
-        {/* Dynamic Center Main Panel (Fluid expansion without horizontal overflow) */}
+        {/* Dynamic Main Panel (Fluid expansion without horizontal overflow) */}
         <main className="flex-1 w-full min-w-0 space-y-6">
 
           {/* ======================================================== */}
@@ -315,9 +369,9 @@ export default function AdminDashboardPage() {
               
               {/* Top 5 Metrics Row */}
               <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 w-full">
-                <GlassCard padding="md" glowColor="fuchsia" className="flex flex-col justify-between">
-                  <span className="text-purple-200 text-xs sm:text-sm font-bold uppercase tracking-wider">Active Cases</span>
-                  <div className="text-3xl sm:text-4xl font-black text-white mt-2 font-mono drop-shadow-[0_0_15px_rgba(217,70,239,0.6)]">
+                <GlassCard padding="md" glowColor="fuchsia" className="flex flex-col justify-between bg-[#0d021a]/90">
+                  <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase tracking-wider">Active Cases</span>
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-mono text-white tracking-tight mt-2 drop-shadow-[0_0_15px_rgba(217,70,239,0.6)]">
                     {stats?.activeCases ?? 142}
                   </div>
                   <span className="text-xs sm:text-sm text-emerald-300 mt-2 font-mono font-bold flex items-center gap-1">
@@ -325,33 +379,33 @@ export default function AdminDashboardPage() {
                   </span>
                 </GlassCard>
 
-                <GlassCard padding="md" glowColor="emerald" className="flex flex-col justify-between">
-                  <span className="text-emerald-200 text-xs sm:text-sm font-bold uppercase tracking-wider">Resolved Today</span>
-                  <div className="text-3xl sm:text-4xl font-black text-emerald-300 mt-2 font-mono drop-shadow-[0_0_15px_rgba(16,185,129,0.6)]">
+                <GlassCard padding="md" glowColor="emerald" className="flex flex-col justify-between bg-[#0d021a]/90">
+                  <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase tracking-wider">Resolved Today</span>
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-mono text-white tracking-tight mt-2 drop-shadow-[0_0_15px_rgba(16,185,129,0.6)]">
                     {stats?.resolvedToday ?? 89}
                   </div>
                   <span className="text-xs sm:text-sm text-emerald-200 mt-2 font-mono font-bold">100% SSIM Verified</span>
                 </GlassCard>
 
-                <GlassCard padding="md" glowColor="pink" className="flex flex-col justify-between !border-pink-500/50">
-                  <span className="text-pink-200 text-xs sm:text-sm font-bold uppercase tracking-wider">Critical Priority</span>
-                  <div className="text-3xl sm:text-4xl font-black text-pink-300 mt-2 font-mono drop-shadow-[0_0_15px_rgba(244,63,94,0.6)]">
+                <GlassCard padding="md" glowColor="pink" className="flex flex-col justify-between !border-pink-500/50 bg-[#0d021a]/90">
+                  <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase tracking-wider">Critical Priority</span>
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-mono text-pink-300 tracking-tight mt-2 drop-shadow-[0_0_15px_rgba(244,63,94,0.6)]">
                     {stats?.criticalPriority ?? 18}
                   </div>
                   <span className="text-xs sm:text-sm text-pink-200 mt-2 font-mono font-bold">24h SLA Tracked</span>
                 </GlassCard>
 
                 <GlassCard padding="md" className="flex flex-col justify-between !border-rose-500/50 !bg-rose-950/30">
-                  <span className="text-rose-200 text-xs sm:text-sm font-bold uppercase tracking-wider">SLA At Risk</span>
-                  <div className="text-3xl sm:text-4xl font-black text-rose-300 mt-2 font-mono drop-shadow-[0_0_15px_rgba(244,63,94,0.6)]">
+                  <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase tracking-wider">SLA At Risk</span>
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-mono text-rose-300 tracking-tight mt-2 drop-shadow-[0_0_15px_rgba(244,63,94,0.6)]">
                     {stats?.slaAtRisk ?? 12}
                   </div>
                   <span className="text-xs sm:text-sm text-rose-200 mt-2 font-mono font-bold">Nudge Active</span>
                 </GlassCard>
 
-                <GlassCard padding="md" glowColor="purple" className="flex flex-col justify-between col-span-2 lg:col-span-1">
-                  <span className="text-purple-200 text-xs sm:text-sm font-bold uppercase tracking-wider">Verification Pending</span>
-                  <div className="text-3xl sm:text-4xl font-black text-fuchsia-200 mt-2 font-mono drop-shadow-[0_0_15px_rgba(217,70,239,0.6)]">
+                <GlassCard padding="md" glowColor="purple" className="flex flex-col justify-between col-span-2 lg:col-span-1 bg-[#0d021a]/90">
+                  <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase tracking-wider">Verification Pending</span>
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-mono text-fuchsia-200 tracking-tight mt-2 drop-shadow-[0_0_15px_rgba(217,70,239,0.6)]">
                     {stats?.verificationPending ?? 45}
                   </div>
                   <span className="text-xs sm:text-sm text-purple-200 mt-2 font-mono font-bold">Citizen Accept Loop</span>
@@ -362,35 +416,35 @@ export default function AdminDashboardPage() {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
 
                 {/* SIH WIDGET 1: Volumetric Pothole & Severity Gauge Widget */}
-                <GlassCard padding="md" glowColor="fuchsia" title="Volumetric Vision Gauge (Depth Anything V2)" className="border-fuchsia-500/45 w-full">
-                  <div className="space-y-4">
+                <GlassCard padding="md" glowColor="fuchsia" title="Volumetric Vision Gauge (Depth Anything V2)" className="border-fuchsia-500/45 w-full bg-[#0d021a]/90">
+                  <div className="space-y-4 w-full">
                     <div className="flex items-center justify-between pb-2 border-b border-purple-500/30 text-sm">
-                      <span className="text-purple-200 font-medium">Target Defect:</span>
+                      <span className="text-xs lg:text-sm font-semibold text-purple-200">Target Defect:</span>
                       <span className="font-mono text-fuchsia-300 font-bold text-base">#SCA-20260821-P1A2</span>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-3 text-center">
+                    <div className="grid grid-cols-3 gap-3 text-center w-full">
                       <div className="bg-purple-950/70 p-3 rounded-xl border border-purple-500/35">
                         <span className="text-xs text-purple-200 uppercase font-bold block mb-1">Max Depth</span>
-                        <span className="text-xl sm:text-2xl font-black text-pink-300 font-mono">18.2 cm</span>
+                        <span className="text-lg sm:text-2xl font-black text-pink-300 font-mono">18.2 cm</span>
                         <span className="text-xs text-rose-200 font-medium block mt-0.5">Severe Crater</span>
                       </div>
                       <div className="bg-purple-950/70 p-3 rounded-xl border border-purple-500/35">
                         <span className="text-xs text-purple-200 uppercase font-bold block mb-1">Surface Area</span>
-                        <span className="text-xl sm:text-2xl font-black text-purple-100 font-mono">0.46 m²</span>
+                        <span className="text-lg sm:text-2xl font-black text-purple-100 font-mono">0.46 m²</span>
                         <span className="text-xs text-purple-200 font-medium block mt-0.5">1x3 Tensor</span>
                       </div>
                       <div className="bg-purple-950/70 p-3 rounded-xl border border-purple-500/35">
                         <span className="text-xs text-purple-200 uppercase font-bold block mb-1">Volume</span>
-                        <span className="text-xl sm:text-2xl font-black text-amber-300 font-mono">0.085 m³</span>
+                        <span className="text-lg sm:text-2xl font-black text-amber-300 font-mono">0.085 m³</span>
                         <span className="text-xs text-amber-200 font-medium block mt-0.5">Critical Tonnage</span>
                       </div>
                     </div>
 
                     {/* Depth Gauge Progress Track */}
-                    <div>
+                    <div className="w-full">
                       <div className="flex justify-between text-xs sm:text-sm font-mono mb-1.5 font-bold">
-                        <span className="text-purple-200">Severity Gauge Index</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200">Severity Gauge Index</span>
                         <span className="text-fuchsia-300">88.4 / 100</span>
                       </div>
                       <div className="w-full bg-purple-950/80 rounded-full h-3 border border-purple-500/40 overflow-hidden">
@@ -398,31 +452,31 @@ export default function AdminDashboardPage() {
                       </div>
                     </div>
 
-                    <div className="bg-fuchsia-950/40 p-3 rounded-xl border border-fuchsia-500/40 text-xs sm:text-sm flex items-center justify-between font-mono">
+                    <div className="bg-fuchsia-950/40 p-3 rounded-xl border border-fuchsia-500/40 text-xs sm:text-sm flex items-center justify-between font-mono w-full">
                       <span className="text-purple-100 font-bold">Repair Material:</span>
-                      <span className="text-emerald-300 font-extrabold">204 kg Cold-Mix Asphalt (9 Bags)</span>
+                      <span className="text-emerald-300 font-extrabold">204 kg Cold-Mix (9 Bags)</span>
                     </div>
                   </div>
                 </GlassCard>
 
                 {/* SIH WIDGET 2: Real-Time AI Processing Log Stream Widget */}
-                <GlassCard padding="md" glowColor="purple" title="Real-Time AI Processing Stream" className="lg:col-span-2 border-purple-500/45 flex flex-col justify-between w-full">
-                  <div className="bg-black/60 rounded-xl p-4 border border-purple-500/40 font-mono text-xs sm:text-sm space-y-2.5 h-48 overflow-y-auto shadow-inner">
+                <GlassCard padding="md" glowColor="purple" title="Real-Time AI Processing Stream" className="lg:col-span-2 border-purple-500/45 flex flex-col justify-between w-full bg-[#0d021a]/90">
+                  <div className="bg-black/70 rounded-xl p-4 border border-purple-500/40 font-mono text-xs sm:text-sm space-y-2.5 h-48 overflow-y-auto shadow-inner w-full">
                     {logLines.map((line, idx) => (
                       <div key={idx} className="flex items-start gap-2.5 leading-relaxed animate-[fadeIn_0.2s_ease-out]">
-                        <span className="text-purple-300/80 font-bold flex-shrink-0">[{line.time}]</span>
-                        <span className={`font-black flex-shrink-0 ${line.tagColor}`}>[{line.tag}]</span>
-                        <span className="text-slate-100 font-medium">{line.msg}</span>
+                        <span className="text-purple-300/80 font-bold shrink-0">[{line.time}]</span>
+                        <span className={`font-black shrink-0 ${line.tagColor}`}>[{line.tag}]</span>
+                        <span className="text-slate-100 font-medium break-all">{line.msg}</span>
                       </div>
                     ))}
                   </div>
 
-                  <div className="pt-3.5 border-t border-purple-500/30 flex items-center justify-between text-xs sm:text-sm font-mono text-purple-200 font-bold">
+                  <div className="pt-3.5 border-t border-purple-500/30 flex items-center justify-between text-xs sm:text-sm font-mono text-purple-200 font-bold w-full">
                     <span className="flex items-center gap-2">
                       <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
                       LangGraph Stream Active
                     </span>
-                    <span className="text-fuchsia-200">PMC Redis Queues: intake • depth • verify</span>
+                    <span className="text-fuchsia-200 truncate">PMC Queues: intake • depth • verify</span>
                   </div>
                 </GlassCard>
 
@@ -432,8 +486,8 @@ export default function AdminDashboardPage() {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
                 
                 {/* Recent Escalations Table */}
-                <GlassCard padding="none" title="Live Municipal Escalation Feed" className="lg:col-span-2 flex flex-col w-full">
-                  <div className="overflow-x-auto flex-1 p-2 sm:p-3">
+                <GlassCard padding="none" title="Live Municipal Escalation Feed" className="lg:col-span-2 flex flex-col w-full bg-[#0d021a]/90">
+                  <div className="overflow-x-auto flex-1 p-2 sm:p-3 w-full">
                     <table className="w-full text-left border-collapse min-w-[550px]">
                       <thead>
                         <tr className="border-b border-purple-500/30 text-purple-200 text-xs sm:text-sm uppercase tracking-wider font-bold">
@@ -484,13 +538,13 @@ export default function AdminDashboardPage() {
                 </GlassCard>
 
                 {/* SIH WIDGET 3: Escalation SLA Countdown Timer Widget */}
-                <GlassCard padding="md" glowColor="pink" title="Auto-Escalation SLA Engine" className="flex flex-col justify-between !border-pink-500/50 w-full">
-                  <div className="space-y-4">
+                <GlassCard padding="md" glowColor="pink" title="Auto-Escalation SLA Engine" className="flex flex-col justify-between !border-pink-500/50 w-full bg-[#0d021a]/90">
+                  <div className="space-y-4 w-full">
                     <div className="text-center py-2">
                       <span className="text-xs font-mono uppercase tracking-widest text-purple-200 font-bold block mb-1">
                         Case #SCA-20260821-P1A2 Threshold
                       </span>
-                      <div className="text-4xl font-black font-mono text-pink-300 drop-shadow-[0_0_18px_rgba(244,63,94,0.7)] animate-pulse">
+                      <div className="text-3xl sm:text-4xl font-black font-mono text-pink-300 drop-shadow-[0_0_18px_rgba(244,63,94,0.7)] animate-pulse">
                         {formatHoursMinsSecs(escalationSeconds)}
                       </div>
                       <span className="text-xs sm:text-sm text-purple-100 font-mono font-semibold mt-1 block">
@@ -498,7 +552,7 @@ export default function AdminDashboardPage() {
                       </span>
                     </div>
 
-                    <div className="space-y-2.5 border-t border-purple-500/30 pt-3.5">
+                    <div className="space-y-2.5 border-t border-purple-500/30 pt-3.5 w-full">
                       <div className="flex items-center justify-between text-xs sm:text-sm font-medium">
                         <span className="text-purple-200">Stage 1 (0-75%):</span>
                         <span className="text-emerald-300 font-mono font-bold">Normal Monitoring ✓</span>
@@ -513,13 +567,207 @@ export default function AdminDashboardPage() {
                       </div>
                       <div className="flex items-center justify-between text-xs sm:text-sm font-medium">
                         <span className="text-purple-200">Stage 4 (100%):</span>
-                        <span className="text-rose-300 font-mono font-extrabold">Senior Executive Escalation</span>
+                        <span className="text-rose-300 font-mono font-extrabold">Executive Escalation</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="pt-3.5 border-t border-purple-500/30 text-xs sm:text-sm text-purple-200 font-mono font-bold text-center">
                     100% Compliance SLA Enforcement
+                  </div>
+                </GlassCard>
+
+              </div>
+
+              {/* DEDICATED ANALYTICS & TELEMETRY SVG GRAPHS SECTION */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full mt-6">
+
+                {/* GRAPH 1: Volumetric Damage & Asphalt Demand Trend (SVG Area Chart) */}
+                <GlassCard padding="md" glowColor="fuchsia" title="Volumetric Damage Trend (m³ Depth & Material Demand)" className="w-full bg-[#0d021a]/90 border border-purple-500/40 rounded-2xl p-6 shadow-2xl">
+                  <div className="space-y-4 w-full">
+                    
+                    {/* Top KPI Metrics Row */}
+                    <div className="grid grid-cols-3 gap-2.5 sm:gap-3 text-center w-full">
+                      <div className="bg-purple-950/70 p-3 rounded-xl border border-purple-500/35">
+                        <span className="text-[11px] sm:text-xs text-purple-200 uppercase font-bold block mb-0.5">Total Vol (7D)</span>
+                        <span className="text-base sm:text-xl font-black text-fuchsia-200 font-mono">1.42 m³</span>
+                      </div>
+                      <div className="bg-purple-950/70 p-3 rounded-xl border border-purple-500/35">
+                        <span className="text-[11px] sm:text-xs text-purple-200 uppercase font-bold block mb-0.5">Asphalt Demand</span>
+                        <span className="text-base sm:text-xl font-black text-emerald-300 font-mono">3,408 kg</span>
+                      </div>
+                      <div className="bg-purple-950/70 p-3 rounded-xl border border-purple-500/35">
+                        <span className="text-[11px] sm:text-xs text-purple-200 uppercase font-bold block mb-0.5">Avg Crater Depth</span>
+                        <span className="text-base sm:text-xl font-black text-pink-300 font-mono">14.8 cm</span>
+                      </div>
+                    </div>
+
+                    {/* Responsive High-Contrast SVG Area Chart */}
+                    <div className="w-full overflow-hidden">
+                      <svg viewBox="0 0 500 200" className="w-full h-48 overflow-visible" preserveAspectRatio="none">
+                        <defs>
+                          <linearGradient id="damageAreaGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#d946ef" stopOpacity="0.45" />
+                            <stop offset="100%" stopColor="#7e22ce" stopOpacity="0.0" />
+                          </linearGradient>
+                          <linearGradient id="damageLineGrad" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="#a855f7" />
+                            <stop offset="50%" stopColor="#d946ef" />
+                            <stop offset="100%" stopColor="#ec4899" />
+                          </linearGradient>
+                          <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="3" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                          </filter>
+                        </defs>
+
+                        {/* Grid Lines */}
+                        <line x1="40" y1="30" x2="490" y2="30" stroke="#a855f7" strokeOpacity="0.15" strokeDasharray="4 4" />
+                        <line x1="40" y1="75" x2="490" y2="75" stroke="#a855f7" strokeOpacity="0.15" strokeDasharray="4 4" />
+                        <line x1="40" y1="120" x2="490" y2="120" stroke="#a855f7" strokeOpacity="0.15" strokeDasharray="4 4" />
+                        <line x1="40" y1="165" x2="490" y2="165" stroke="#a855f7" strokeOpacity="0.25" />
+
+                        {/* Y-Axis Labels */}
+                        <text x="30" y="34" fill="#c084fc" fontSize="10" fontFamily="monospace" textAnchor="end">1.5m³</text>
+                        <text x="30" y="79" fill="#c084fc" fontSize="10" fontFamily="monospace" textAnchor="end">1.0m³</text>
+                        <text x="30" y="124" fill="#c084fc" fontSize="10" fontFamily="monospace" textAnchor="end">0.5m³</text>
+                        <text x="30" y="169" fill="#c084fc" fontSize="10" fontFamily="monospace" textAnchor="end">0.0m³</text>
+
+                        {/* Filled Area Gradient */}
+                        <polygon 
+                          points="60,165 60,135 130,110 200,125 270,75 340,90 410,50 480,65 480,165" 
+                          fill="url(#damageAreaGrad)" 
+                        />
+
+                        {/* Glowing Trend Line */}
+                        <polyline 
+                          points="60,135 130,110 200,125 270,75 340,90 410,50 480,65" 
+                          fill="none" 
+                          stroke="url(#damageLineGrad)" 
+                          strokeWidth="3.5" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round"
+                          filter="url(#glowFilter)"
+                        />
+
+                        {/* Data Points */}
+                        {[
+                          { cx: 60, cy: 135, val: '0.34' },
+                          { cx: 130, cy: 110, val: '0.62' },
+                          { cx: 200, cy: 125, val: '0.45' },
+                          { cx: 270, cy: 75, val: '1.02' },
+                          { cx: 340, cy: 90, val: '0.84' },
+                          { cx: 410, cy: 50, val: '1.28' },
+                          { cx: 480, cy: 65, val: '1.12' },
+                        ].map((pt, i) => (
+                          <g key={i}>
+                            <circle cx={pt.cx} cy={pt.cy} r="4.5" fill="#fdf4ff" stroke="#ec4899" strokeWidth="2.5" />
+                          </g>
+                        ))}
+
+                        {/* X-Axis Day Labels */}
+                        <text x="60" y="186" fill="#e9d5ff" fontSize="11" fontWeight="bold" textAnchor="middle">Mon</text>
+                        <text x="130" y="186" fill="#e9d5ff" fontSize="11" fontWeight="bold" textAnchor="middle">Tue</text>
+                        <text x="200" y="186" fill="#e9d5ff" fontSize="11" fontWeight="bold" textAnchor="middle">Wed</text>
+                        <text x="270" y="186" fill="#e9d5ff" fontSize="11" fontWeight="bold" textAnchor="middle">Thu</text>
+                        <text x="340" y="186" fill="#e9d5ff" fontSize="11" fontWeight="bold" textAnchor="middle">Fri</text>
+                        <text x="410" y="186" fill="#e9d5ff" fontSize="11" fontWeight="bold" textAnchor="middle">Sat</text>
+                        <text x="480" y="186" fill="#e9d5ff" fontSize="11" fontWeight="bold" textAnchor="middle">Sun</text>
+                      </svg>
+                    </div>
+
+                    <div className="pt-2 border-t border-purple-500/30 flex items-center justify-between text-xs font-mono text-purple-200">
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-fuchsia-400 animate-pulse" />
+                        Depth Anything V2 Daily Aggregate
+                      </span>
+                      <span className="text-emerald-300 font-bold">ρ = 2400 kg/m³ Formula</span>
+                    </div>
+                  </div>
+                </GlassCard>
+
+                {/* GRAPH 2: PMC Ward Case Distribution & Multi-Agent SLA Performance (SVG Bar Chart) */}
+                <GlassCard padding="md" glowColor="emerald" title="PMC Ward Distribution & Multi-Agent SLA Performance" className="w-full bg-[#0d021a]/90 border border-purple-500/40 rounded-2xl p-6 shadow-2xl">
+                  <div className="space-y-4 w-full">
+                    
+                    {/* Legend & Stats */}
+                    <div className="flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm font-semibold">
+                      <div className="flex items-center gap-4">
+                        <span className="flex items-center gap-1.5 text-purple-200">
+                          <span className="w-3 h-3 rounded-sm bg-purple-500 shadow-[0_0_8px_#a855f7]" />
+                          Reported Cases
+                        </span>
+                        <span className="flex items-center gap-1.5 text-emerald-200">
+                          <span className="w-3 h-3 rounded-sm bg-emerald-400 shadow-[0_0_8px_#22c55e]" />
+                          SLA Resolved (%)
+                        </span>
+                      </div>
+                      <span className="text-xs font-mono text-fuchsia-200 bg-purple-950/70 px-2.5 py-1 rounded-lg border border-purple-500/40 font-bold">
+                        P95: 142ms Dispatch
+                      </span>
+                    </div>
+
+                    {/* Responsive High-Contrast SVG Bar Chart */}
+                    <div className="w-full overflow-hidden">
+                      <svg viewBox="0 0 500 200" className="w-full h-48 overflow-visible" preserveAspectRatio="none">
+                        <defs>
+                          <linearGradient id="barCaseGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#c084fc" />
+                            <stop offset="100%" stopColor="#7e22ce" />
+                          </linearGradient>
+                          <linearGradient id="barSlaGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#4ade80" />
+                            <stop offset="100%" stopColor="#15803d" />
+                          </linearGradient>
+                        </defs>
+
+                        {/* Grid Lines */}
+                        <line x1="40" y1="30" x2="490" y2="30" stroke="#a855f7" strokeOpacity="0.15" strokeDasharray="4 4" />
+                        <line x1="40" y1="75" x2="490" y2="75" stroke="#a855f7" strokeOpacity="0.15" strokeDasharray="4 4" />
+                        <line x1="40" y1="120" x2="490" y2="120" stroke="#a855f7" strokeOpacity="0.15" strokeDasharray="4 4" />
+                        <line x1="40" y1="165" x2="490" y2="165" stroke="#a855f7" strokeOpacity="0.25" />
+
+                        {/* Y-Axis Scale */}
+                        <text x="30" y="34" fill="#c084fc" fontSize="10" fontFamily="monospace" textAnchor="end">100</text>
+                        <text x="30" y="79" fill="#c084fc" fontSize="10" fontFamily="monospace" textAnchor="end">75</text>
+                        <text x="30" y="124" fill="#c084fc" fontSize="10" fontFamily="monospace" textAnchor="end">50</text>
+                        <text x="30" y="169" fill="#c084fc" fontSize="10" fontFamily="monospace" textAnchor="end">0</text>
+
+                        {/* Ward Group 1: PMC Ward-15 (Hadapsar) */}
+                        {/* Bar 1: Volume = 68 cases (height = 102px -> y = 63) */}
+                        <rect x="75" y="63" width="28" height="102" rx="4" fill="url(#barCaseGrad)" />
+                        <text x="89" y="55" fill="#f3e8ff" fontSize="10" fontWeight="bold" fontFamily="monospace" textAnchor="middle">68</text>
+                        {/* Bar 2: SLA = 91% (height = 136px -> y = 29) */}
+                        <rect x="109" y="29" width="28" height="136" rx="4" fill="url(#barSlaGrad)" />
+                        <text x="123" y="21" fill="#bbf7d0" fontSize="10" fontWeight="bold" fontFamily="monospace" textAnchor="middle">91%</text>
+
+                        {/* Ward Group 2: PMC Ward-08 (Shivajinagar) */}
+                        {/* Bar 1: Volume = 84 cases (height = 126px -> y = 39) */}
+                        <rect x="220" y="39" width="28" height="126" rx="4" fill="url(#barCaseGrad)" />
+                        <text x="234" y="31" fill="#f3e8ff" fontSize="10" fontWeight="bold" fontFamily="monospace" textAnchor="middle">84</text>
+                        {/* Bar 2: SLA = 96% (height = 144px -> y = 21) */}
+                        <rect x="254" y="21" width="28" height="144" rx="4" fill="url(#barSlaGrad)" />
+                        <text x="268" y="13" fill="#bbf7d0" fontSize="10" fontWeight="bold" fontFamily="monospace" textAnchor="middle">96%</text>
+
+                        {/* Ward Group 3: PMC Ward-04 (Viman Nagar) */}
+                        {/* Bar 1: Volume = 42 cases (height = 63px -> y = 102) */}
+                        <rect x="365" y="102" width="28" height="63" rx="4" fill="url(#barCaseGrad)" />
+                        <text x="379" y="94" fill="#f3e8ff" fontSize="10" fontWeight="bold" fontFamily="monospace" textAnchor="middle">42</text>
+                        {/* Bar 2: SLA = 84% (height = 126px -> y = 39) */}
+                        <rect x="399" y="39" width="28" height="126" rx="4" fill="url(#barSlaGrad)" />
+                        <text x="413" y="31" fill="#bbf7d0" fontSize="10" fontWeight="bold" fontFamily="monospace" textAnchor="middle">84%</text>
+
+                        {/* X-Axis Ward Labels */}
+                        <text x="106" y="186" fill="#e9d5ff" fontSize="10" fontWeight="bold" textAnchor="middle">PMC Ward-15 (Hadapsar)</text>
+                        <text x="251" y="186" fill="#e9d5ff" fontSize="10" fontWeight="bold" textAnchor="middle">PMC Ward-08 (Shivajinagar)</text>
+                        <text x="396" y="186" fill="#e9d5ff" fontSize="10" fontWeight="bold" textAnchor="middle">PMC Ward-04 (Viman Ngr)</text>
+                      </svg>
+                    </div>
+
+                    <div className="pt-2 border-t border-purple-500/30 flex items-center justify-between text-xs font-mono text-purple-200">
+                      <span className="text-emerald-300 font-bold">PMC Avg SLA Compliance: 90.3%</span>
+                      <span className="text-fuchsia-300 font-bold">0 Breaches Escalated</span>
+                    </div>
                   </div>
                 </GlassCard>
 
@@ -592,6 +840,9 @@ export default function AdminDashboardPage() {
                           {pt.depth && (
                             <div className="text-xs text-amber-300 font-mono font-bold mb-2">Depth Est: {pt.depth}</div>
                           )}
+                          <div className="bg-black/70 border border-purple-500/30 p-2 rounded-lg font-mono text-[11px] text-purple-300 break-all mb-2">
+                            SHA: {pt.sha.slice(0, 24)}...
+                          </div>
                           <button
                             onClick={() => { setSelectedCase(pt.id); setCopilotOpen(true); }}
                             className="w-full py-2 text-xs font-bold bg-purple-600/40 text-white border border-fuchsia-400/50 rounded-xl hover:bg-purple-600/60 transition-colors"
@@ -689,7 +940,7 @@ export default function AdminDashboardPage() {
             <div className="space-y-5 w-full animate-[fadeIn_0.3s_ease-out]">
               
               {/* Filter Bar */}
-              <GlassCard padding="sm" className="flex flex-wrap items-center justify-between gap-4 border-purple-500/40 w-full">
+              <GlassCard padding="sm" className="flex flex-wrap items-center justify-between gap-4 border-purple-500/40 w-full bg-[#0d021a]/90">
                 <div className="flex-1 min-w-[240px] relative">
                   <input
                     type="text"
@@ -730,8 +981,8 @@ export default function AdminDashboardPage() {
               </GlassCard>
 
               {/* Cases Table */}
-              <GlassCard padding="none" className="overflow-hidden border-purple-500/40 w-full">
-                <div className="overflow-x-auto">
+              <GlassCard padding="none" className="overflow-hidden border-purple-500/40 w-full bg-[#0d021a]/90">
+                <div className="overflow-x-auto w-full">
                   <table className="w-full text-left border-collapse min-w-[750px]">
                     <thead className="bg-purple-950/60 border-b border-purple-500/30">
                       <tr className="text-purple-200 text-xs sm:text-sm uppercase tracking-wider font-bold">
@@ -790,7 +1041,7 @@ export default function AdminDashboardPage() {
             <div className="space-y-6 w-full animate-[fadeIn_0.3s_ease-out]">
               
               {/* Header Agent Overview */}
-              <GlassCard padding="md" glowColor="fuchsia" className="border-purple-500/45 w-full">
+              <GlassCard padding="md" glowColor="fuchsia" className="border-purple-500/45 w-full bg-[#0d021a]/90">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div>
                     <h2 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2.5">
@@ -811,14 +1062,14 @@ export default function AdminDashboardPage() {
               </GlassCard>
 
               {/* 4-Runtime Responsive Grid Protected Against Horizontal Overflow */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 w-full min-w-0">
 
                 {/* Runtime A: Intake & Localization Agent */}
-                <GlassCard padding="md" glowColor="fuchsia" className="flex flex-col justify-between space-y-4 w-full">
+                <GlassCard padding="md" glowColor="fuchsia" className="flex flex-col justify-between space-y-4 w-full bg-[#0d021a]/90 border border-purple-500/40 shadow-2xl rounded-2xl p-4 lg:p-6">
                   <div>
                     <div className="flex items-center justify-between pb-3.5 border-b border-purple-500/30">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-9 h-9 rounded-xl bg-fuchsia-500/25 border border-fuchsia-400/50 flex items-center justify-center text-base shadow-[0_0_12px_rgba(217,70,239,0.4)]">
+                        <div className="w-9 h-9 rounded-xl bg-fuchsia-500/25 border border-fuchsia-400/50 flex items-center justify-center text-base shadow-[0_0_12px_rgba(217,70,239,0.4)] shrink-0">
                           🎙️
                         </div>
                         <div>
@@ -831,19 +1082,19 @@ export default function AdminDashboardPage() {
 
                     <div className="grid grid-cols-2 gap-3 my-4 text-xs sm:text-sm font-mono bg-purple-950/60 p-4 rounded-xl border border-purple-500/30">
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">P95 Latency</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">P95 Latency</span>
                         <span className="text-emerald-300 font-black text-sm">142ms (&lt;200ms SLA)</span>
                       </div>
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">Confidence</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">Confidence</span>
                         <span className="text-fuchsia-200 font-black text-sm">98.4%</span>
                       </div>
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">Model</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">Model</span>
                         <span className="text-slate-100 font-bold">Bhashini + ST_Contains</span>
                       </div>
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">Queue</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">Queue</span>
                         <span className="text-fuchsia-200 font-bold">intake_worker</span>
                       </div>
                     </div>
@@ -851,6 +1102,10 @@ export default function AdminDashboardPage() {
                     <p className="text-xs sm:text-sm text-slate-100 leading-relaxed font-medium">
                       <strong className="text-fuchsia-300">Latest Decision:</strong> Resolved PMC Ward-08 (Shivajinagar/Kothrud) polygon via PostGIS point-in-polygon in 18ms. Fast-path acknowledged case UUID in 88ms.
                     </p>
+
+                    <div className="bg-black/70 border border-purple-500/30 p-2 rounded-lg font-mono text-xs text-purple-300 break-all mt-3">
+                      SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+                    </div>
                   </div>
 
                   <div className="text-xs sm:text-sm font-mono text-purple-200 font-bold pt-3 border-t border-purple-500/30 flex justify-between">
@@ -860,11 +1115,11 @@ export default function AdminDashboardPage() {
                 </GlassCard>
 
                 {/* Runtime B: Governance & Priority Engine */}
-                <GlassCard padding="md" glowColor="pink" className="flex flex-col justify-between space-y-4 !border-pink-500/50 w-full">
+                <GlassCard padding="md" glowColor="pink" className="flex flex-col justify-between space-y-4 !border-pink-500/50 w-full bg-[#0d021a]/90 shadow-2xl rounded-2xl p-4 lg:p-6">
                   <div>
                     <div className="flex items-center justify-between pb-3.5 border-b border-purple-500/30">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-9 h-9 rounded-xl bg-pink-500/25 border border-pink-400/50 flex items-center justify-center text-base shadow-[0_0_12px_rgba(236,72,153,0.4)]">
+                        <div className="w-9 h-9 rounded-xl bg-pink-500/25 border border-pink-400/50 flex items-center justify-center text-base shadow-[0_0_12px_rgba(236,72,153,0.4)] shrink-0">
                           ⚖️
                         </div>
                         <div>
@@ -877,19 +1132,19 @@ export default function AdminDashboardPage() {
 
                     <div className="grid grid-cols-2 gap-3 my-4 text-xs sm:text-sm font-mono bg-purple-950/60 p-4 rounded-xl border border-purple-500/30">
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">P95 Latency</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">P95 Latency</span>
                         <span className="text-emerald-300 font-black text-sm">32ms</span>
                       </div>
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">Audit Coverage</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">Audit Coverage</span>
                         <span className="text-pink-300 font-black text-sm">100% Deterministic</span>
                       </div>
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">Algorithm</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">Algorithm</span>
                         <span className="text-slate-100 font-bold">5-Factor Weighted Score</span>
                       </div>
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">Queue</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">Queue</span>
                         <span className="text-pink-200 font-bold">priority_worker</span>
                       </div>
                     </div>
@@ -897,6 +1152,10 @@ export default function AdminDashboardPage() {
                     <p className="text-xs sm:text-sm text-slate-100 leading-relaxed font-medium">
                       <strong className="text-pink-300">Latest Decision:</strong> Computed urgency <span className="text-pink-300 font-black font-mono">92.5/100 (CRITICAL)</span> for Pune arterial road defect; set 24h SLA and supervisor alert.
                     </p>
+
+                    <div className="bg-black/70 border border-purple-500/30 p-2 rounded-lg font-mono text-xs text-purple-300 break-all mt-3">
+                      PostGIS SRID 4326: POINT(73.842 18.528) &rarr; Dist 0.0m locked
+                    </div>
                   </div>
 
                   <div className="text-xs sm:text-sm font-mono text-purple-200 font-bold pt-3 border-t border-purple-500/30 flex justify-between">
@@ -906,11 +1165,11 @@ export default function AdminDashboardPage() {
                 </GlassCard>
 
                 {/* Runtime C: Volumetric Vision (Depth Anything V2) */}
-                <GlassCard padding="md" glowColor="purple" className="flex flex-col justify-between space-y-4 w-full">
+                <GlassCard padding="md" glowColor="purple" className="flex flex-col justify-between space-y-4 w-full bg-[#0d021a]/90 border border-purple-500/40 shadow-2xl rounded-2xl p-4 lg:p-6">
                   <div>
                     <div className="flex items-center justify-between pb-3.5 border-b border-purple-500/30">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-9 h-9 rounded-xl bg-purple-500/25 border border-purple-400/50 flex items-center justify-center text-base shadow-[0_0_12px_rgba(168,85,247,0.4)]">
+                        <div className="w-9 h-9 rounded-xl bg-purple-500/25 border border-purple-400/50 flex items-center justify-center text-base shadow-[0_0_12px_rgba(168,85,247,0.4)] shrink-0">
                           📐
                         </div>
                         <div>
@@ -923,19 +1182,19 @@ export default function AdminDashboardPage() {
 
                     <div className="grid grid-cols-2 gap-3 my-4 text-xs sm:text-sm font-mono bg-purple-950/60 p-4 rounded-xl border border-purple-500/30">
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">Inference Time</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">Inference Time</span>
                         <span className="text-emerald-300 font-black text-sm">96ms (&lt;100ms Target)</span>
                       </div>
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">Input Tensor</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">Input Tensor</span>
                         <span className="text-fuchsia-200 font-black text-sm">1x3x518x518</span>
                       </div>
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">Material Model</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">Material Model</span>
                         <span className="text-slate-100 font-bold">Cold-Mix (2400 kg/m³)</span>
                       </div>
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">Queue</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">Queue</span>
                         <span className="text-purple-200 font-bold">depth_worker</span>
                       </div>
                     </div>
@@ -943,6 +1202,10 @@ export default function AdminDashboardPage() {
                     <p className="text-xs sm:text-sm text-slate-100 leading-relaxed font-medium">
                       <strong className="text-purple-300">Latest Decision:</strong> Extracted depth depression map: Volume = <span className="text-amber-300 font-bold font-mono">0.085 m³</span>. Dispatched requirement: <span className="text-fuchsia-200 font-bold font-mono">204 kg cold-mix asphalt (9x 25kg bags)</span>.
                     </p>
+
+                    <div className="bg-black/70 border border-purple-500/30 p-2 rounded-lg font-mono text-xs text-purple-300 break-all mt-3">
+                      Depth Tensor Checksum: 8f434346648f6b96df89dda901c5176b10a6d839
+                    </div>
                   </div>
 
                   <div className="text-xs sm:text-sm font-mono text-purple-200 font-bold pt-3 border-t border-purple-500/30 flex justify-between">
@@ -952,11 +1215,11 @@ export default function AdminDashboardPage() {
                 </GlassCard>
 
                 {/* Runtime D: Anti-Fraud & Verification Agent */}
-                <GlassCard padding="md" glowColor="emerald" className="flex flex-col justify-between space-y-4 w-full">
+                <GlassCard padding="md" glowColor="emerald" className="flex flex-col justify-between space-y-4 w-full bg-[#0d021a]/90 border border-purple-500/40 shadow-2xl rounded-2xl p-4 lg:p-6">
                   <div>
                     <div className="flex items-center justify-between pb-3.5 border-b border-purple-500/30">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-9 h-9 rounded-xl bg-emerald-500/25 border border-emerald-400/50 flex items-center justify-center text-base shadow-[0_0_12px_rgba(16,185,129,0.4)]">
+                        <div className="w-9 h-9 rounded-xl bg-emerald-500/25 border border-emerald-400/50 flex items-center justify-center text-base shadow-[0_0_12px_rgba(16,185,129,0.4)] shrink-0">
                           🛡️
                         </div>
                         <div>
@@ -969,19 +1232,19 @@ export default function AdminDashboardPage() {
 
                     <div className="grid grid-cols-2 gap-3 my-4 text-xs sm:text-sm font-mono bg-purple-950/60 p-4 rounded-xl border border-purple-500/30">
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">False Closure</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">False Closure</span>
                         <span className="text-emerald-300 font-black text-sm">&lt; 0.8% (&lt;2% Target)</span>
                       </div>
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">GPS Tolerance</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">GPS Tolerance</span>
                         <span className="text-emerald-300 font-black text-sm">100m Radius Gate</span>
                       </div>
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">SSIM Threshold</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">SSIM Threshold</span>
                         <span className="text-slate-100 font-bold">0.20 &le; SSIM &le; 0.95</span>
                       </div>
                       <div>
-                        <span className="text-purple-200 uppercase font-bold block text-xs mb-0.5">Queue</span>
+                        <span className="text-xs lg:text-sm font-semibold text-purple-200 uppercase block mb-0.5">Queue</span>
                         <span className="text-emerald-200 font-bold">verification_worker</span>
                       </div>
                     </div>
@@ -989,6 +1252,10 @@ export default function AdminDashboardPage() {
                     <p className="text-xs sm:text-sm text-slate-100 leading-relaxed font-medium">
                       <strong className="text-emerald-300">Latest Decision:</strong> Verified completion for Case #SCA-P1A2: SHA-256 hash valid, GPS delta = <span className="text-emerald-300 font-bold font-mono">39.4m</span>, SSIM = <span className="text-fuchsia-200 font-bold font-mono">0.625</span>. Promoted to Verification Pending.
                     </p>
+
+                    <div className="bg-black/70 border border-purple-500/30 p-2 rounded-lg font-mono text-xs text-purple-300 break-all mt-3">
+                      Verification Hash: 323982c8947d29ca4a8497d3910c6607421f1d17
+                    </div>
                   </div>
 
                   <div className="text-xs sm:text-sm font-mono text-purple-200 font-bold pt-3 border-t border-purple-500/30 flex justify-between">
@@ -1000,8 +1267,8 @@ export default function AdminDashboardPage() {
               </div>
 
               {/* LangGraph Pipeline Visualizer */}
-              <GlassCard padding="md" title="LangGraph Multi-Agent Orchestration Pipeline" className="border-purple-500/40 w-full">
-                <div className="py-4 overflow-x-auto">
+              <GlassCard padding="md" title="LangGraph Multi-Agent Orchestration Pipeline" className="border-purple-500/40 w-full bg-[#0d021a]/90">
+                <div className="py-4 overflow-x-auto w-full">
                   <div className="flex items-center justify-between min-w-[780px] gap-3">
                     {[
                       { step: '1', title: 'Citizen Intake', sub: 'Camera / Voice / PDF', active: true },

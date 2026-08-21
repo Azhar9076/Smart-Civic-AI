@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import GlassCard from '@/components/GlassCard';
 import GlowButton from '@/components/GlowButton';
 import CameraCapture from '@/components/CameraCapture';
@@ -18,7 +18,7 @@ const categories = [
 ];
 
 // Pune Municipal Corporation Default Center Coordinates
-const PUNE_DEFAULT = { lat: 18.5204, lng: 73.8567, address: 'PMC Ward-08 (Shivajinagar, Pune)' };
+const PUNE_DEFAULT = { lat: 18.5204, lng: 73.8567, address: 'PMC Ward-15 (Hadapsar/Handewadi, Pune)' };
 
 export default function ReportPage() {
   const [step, setStep] = useState(1);
@@ -33,6 +33,9 @@ export default function ReportPage() {
   const [details, setDetails] = useState<{ category: string; severity: number }>({ category: '', severity: 3 });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successId, setSuccessId] = useState<string | null>(null);
+
+  const cameraInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Native HTML5 Geolocation detection on page mount
   useEffect(() => {
@@ -59,7 +62,7 @@ export default function ReportPage() {
   const handleNext = () => setStep(prev => prev + 1);
   const handlePrev = () => setStep(prev => prev - 1);
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const selectedFile = e.target.files[0];
       const isPdf = selectedFile.type === 'application/pdf' || selectedFile.name.toLowerCase().endsWith('.pdf');
@@ -113,20 +116,20 @@ export default function ReportPage() {
 
   if (successId) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[75vh] px-4">
-        <GlassCard padding="lg" glowColor="fuchsia" className="max-w-lg w-full text-center border-purple-500/50 shadow-[0_0_40px_rgba(217,70,239,0.35)]">
-          <div className="w-22 h-22 bg-gradient-to-tr from-purple-600 to-fuchsia-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(217,70,239,0.6)] border-2 border-fuchsia-300/50">
-            <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="flex flex-col items-center justify-center min-h-[75vh] px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full box-border">
+        <GlassCard padding="lg" glowColor="fuchsia" className="max-w-lg w-full text-center border-purple-500/50 shadow-[0_0_40px_rgba(217,70,239,0.35)] bg-[#0d021a]/90">
+          <div className="w-20 h-20 bg-gradient-to-tr from-purple-600 to-fuchsia-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(217,70,239,0.6)] border-2 border-fuchsia-300/50">
+            <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h2 className="text-3xl font-extrabold text-white mb-2 tracking-tight">Civic Complaint Logged!</h2>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-2 tracking-tight">Civic Complaint Logged!</h2>
           <p className="text-purple-200 text-sm sm:text-base mb-6 font-medium">
             Dispatched to <span className="text-fuchsia-200 font-bold">Pune Municipal PostGIS Gateway</span> in &lt;150ms.
           </p>
           <div className="bg-purple-950/70 p-5 rounded-2xl border border-purple-500/40 mb-8 shadow-inner">
             <div className="text-xs text-purple-200 mb-1 font-mono uppercase font-bold tracking-widest">Case Tracking UUID</div>
-            <div className="text-2xl sm:text-3xl font-mono text-fuchsia-200 font-black tracking-wider">{successId}</div>
+            <div className="text-xl sm:text-2xl font-mono text-fuchsia-200 font-black tracking-wider break-all">{successId}</div>
           </div>
           <GlowButton variant="fuchsia" size="lg" className="w-full font-extrabold text-base" onClick={() => window.location.href = `/track/${successId}`}>
             🔍 Track Investigation Timeline
@@ -137,9 +140,9 @@ export default function ReportPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto py-8 px-4 sm:px-0">
+    <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8 w-full min-w-0 box-border overflow-hidden">
       {/* Progress Bar */}
-      <div className="flex gap-2.5 mb-8">
+      <div className="flex gap-2.5 mb-8 w-full">
         {[1, 2, 3, 4].map(i => (
           <div 
             key={i} 
@@ -152,24 +155,24 @@ export default function ReportPage() {
         ))}
       </div>
 
-      <div className="mb-8">
-        <h1 className="text-3xl sm:text-4xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-fuchsia-100 to-purple-200">
+      <div className="mb-8 w-full">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-fuchsia-100 to-purple-200">
           Report a Civic Issue
         </h1>
         <p className="text-purple-200 text-sm sm:text-base font-medium mt-1">
-          Upload camera photo or PDF document evidence for autonomous AI verification and Pune Municipal dispatch.
+          Upload rear-camera photo or PDF document evidence for autonomous AI verification and Pune Municipal dispatch.
         </p>
       </div>
 
-      {/* STEP 1: EVIDENCE (CAMERA / PHOTO / PDF DOCUMENT) */}
+      {/* STEP 1: EVIDENCE (DUAL ACTION: REAR CAMERA & GALLERY/PDF) */}
       {step === 1 && (
-        <div className="space-y-6 animate-[fadeIn_0.3s_ease-out]">
-          <div className="flex items-center justify-between pb-1 border-b border-purple-500/30">
-            <h2 className="text-lg font-extrabold text-fuchsia-200">Step 1: Evidence Capture</h2>
-            <span className="text-xs font-mono font-bold text-purple-200 bg-purple-950/60 px-3 py-1 rounded-full border border-purple-500/30">Photo & PDF Supported</span>
+        <div className="space-y-6 w-full animate-[fadeIn_0.3s_ease-out]">
+          <div className="flex items-center justify-between pb-1 border-b border-purple-500/30 w-full">
+            <h2 className="text-base sm:text-lg font-extrabold text-fuchsia-200">Step 1: Evidence Capture</h2>
+            <span className="text-xs font-mono font-bold text-purple-200 bg-purple-950/60 px-3 py-1 rounded-full border border-purple-500/30">Camera & PDF Supported</span>
           </div>
 
-          {/* Camera Direct Capture with rear-camera lock */}
+          {/* WebRTC Live Camera Preview component */}
           <CameraCapture 
             onCapture={(file) => { 
               const fileUrl = URL.createObjectURL(file);
@@ -177,56 +180,84 @@ export default function ReportPage() {
             }} 
           />
 
-          {/* PDF Document / Photo Upload Area */}
-          <GlassCard padding="md" glowColor="purple" className="text-center border-purple-500/40">
-            <div className="flex flex-col items-center justify-center space-y-3.5">
+          {/* Dual-Action Native Mobile Camera & Gallery/PDF Card */}
+          <GlassCard padding="md" glowColor="purple" className="text-center border-purple-500/40 w-full bg-[#0d021a]/90">
+            <div className="flex flex-col items-center justify-center space-y-4 w-full">
               <div className="w-14 h-14 rounded-2xl bg-purple-600/30 border border-fuchsia-400/50 flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(217,70,239,0.4)]">
-                📑
+                📸
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Upload Document or Image</h3>
-                <p className="text-xs sm:text-sm text-purple-200 font-medium mt-1">
-                  Accepts <span className="text-fuchsia-200 font-mono font-bold">.pdf</span>, <span className="text-fuchsia-200 font-mono font-bold">.jpg</span>, <span className="text-fuchsia-200 font-mono font-bold">.png</span> (Municipal petitions, utility bills, inspection notes)
+                <h3 className="text-base font-bold text-white">Direct Mobile Upload</h3>
+                <p className="text-xs sm:text-sm text-purple-200 font-medium mt-1 max-w-md mx-auto">
+                  Take a live photo with your rear smartphone camera, or upload existing image / PDF documents.
                 </p>
               </div>
 
-              <label className="glow-btn-purple cursor-pointer px-6 py-3.5 rounded-xl text-sm font-bold inline-flex items-center gap-2.5 shadow-md">
-                <span className="text-base">📁</span>
-                <span>Select Photo or PDF</span>
-                <input 
-                  type="file" 
-                  accept="image/*,application/pdf,.pdf" 
-                  capture="environment"
-                  className="hidden" 
-                  onChange={handleFileUpload} 
-                />
-              </label>
+              {/* Hidden Native File Inputs */}
+              <input 
+                ref={cameraInputRef}
+                type="file" 
+                accept="image/*" 
+                capture="environment" 
+                id="camera-upload" 
+                className="hidden" 
+                onChange={handleFileChange} 
+              />
+              <input 
+                ref={fileInputRef}
+                type="file" 
+                accept="image/*,application/pdf,.pdf" 
+                id="file-upload" 
+                className="hidden" 
+                onChange={handleFileChange} 
+              />
+
+              {/* Dual-Action Buttons Side by Side */}
+              <div className="flex flex-col sm:flex-row gap-3 w-full max-w-md justify-center">
+                <button
+                  type="button"
+                  onClick={() => cameraInputRef.current?.click()}
+                  className="flex-1 py-3 px-5 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-500 hover:to-fuchsia-500 border border-fuchsia-300/50 shadow-[0_0_20px_rgba(217,70,239,0.4)] transition-all flex items-center justify-center gap-2 active:scale-95"
+                >
+                  <span className="text-base">📷</span>
+                  <span>Capture Live Photo</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="flex-1 py-3 px-5 rounded-xl text-sm font-bold text-purple-200 bg-purple-950/60 hover:bg-purple-900/60 border border-purple-500/40 shadow-sm transition-all flex items-center justify-center gap-2 active:scale-95"
+                >
+                  <span className="text-base">📁</span>
+                  <span>Browse Gallery / PDF</span>
+                </button>
+              </div>
             </div>
           </GlassCard>
 
           {/* Sleek Purple-Glass Inline PDF & Media Preview */}
           {evidence.file && (
-            <GlassCard padding="sm" glowColor="fuchsia" className="border-fuchsia-500/50 animate-[fadeIn_0.3s_ease-out]">
-              <div className="flex items-center justify-between pb-2.5 border-b border-purple-500/30 mb-3">
-                <div className="flex items-center gap-2.5">
-                  <span className="text-xl">{evidence.isPdf ? '📄' : '🖼️'}</span>
-                  <span className="text-sm font-extrabold text-white truncate max-w-[240px]">
+            <GlassCard padding="sm" glowColor="fuchsia" className="border-fuchsia-500/50 w-full animate-[fadeIn_0.3s_ease-out] bg-[#0d021a]/90">
+              <div className="flex items-center justify-between pb-2.5 border-b border-purple-500/30 mb-3 w-full">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <span className="text-xl shrink-0">{evidence.isPdf ? '📄' : '🖼️'}</span>
+                  <span className="text-xs sm:text-sm font-extrabold text-white truncate max-w-[200px] sm:max-w-[280px]">
                     {evidence.file.name}
                   </span>
-                  <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-purple-500/30 text-fuchsia-200 border border-fuchsia-400/50">
-                    {evidence.isPdf ? 'PDF DOCUMENT' : 'IMAGE EVIDENCE'}
+                  <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-purple-500/30 text-fuchsia-200 border border-fuchsia-400/50 shrink-0">
+                    {evidence.isPdf ? 'PDF' : 'IMAGE'}
                   </span>
                 </div>
                 <button
                   onClick={() => setEvidence({ ...evidence, file: undefined, fileUrl: undefined, isPdf: false })}
-                  className="text-xs font-bold text-rose-300 hover:text-rose-200 px-2 py-1 bg-rose-950/40 rounded-lg border border-rose-500/30 font-mono"
+                  className="text-xs font-bold text-rose-300 hover:text-rose-200 px-2.5 py-1 bg-rose-950/40 rounded-lg border border-rose-500/30 font-mono shrink-0"
                 >
                   ✕ Remove
                 </button>
               </div>
 
               {evidence.isPdf ? (
-                <div className="space-y-2.5">
+                <div className="space-y-2.5 w-full">
                   <div className="w-full h-56 bg-black/60 rounded-xl overflow-hidden border border-purple-500/40 relative">
                     <iframe 
                       src={evidence.fileUrl} 
@@ -240,7 +271,7 @@ export default function ReportPage() {
                   </div>
                 </div>
               ) : (
-                <div className="relative rounded-xl overflow-hidden max-h-56 flex justify-center bg-black/60 border border-purple-500/40">
+                <div className="relative rounded-xl overflow-hidden max-h-56 flex justify-center bg-black/60 border border-purple-500/40 w-full">
                   <img src={evidence.fileUrl} alt="Preview" className="h-56 object-contain" />
                 </div>
               )}
@@ -248,11 +279,11 @@ export default function ReportPage() {
           )}
 
           {/* Voice Input */}
-          <div className="pt-2">
+          <div className="pt-2 w-full">
             <div className="text-center text-xs font-mono font-bold uppercase tracking-widest text-purple-200 my-3">— OR VOICE / TEXT REPORT —</div>
             <VoiceRecorder onRecording={(blob) => { setEvidence({ ...evidence, audio: blob }); }} />
             <textarea 
-              className="w-full bg-purple-950/60 border border-purple-500/40 rounded-xl p-4 text-sm text-white placeholder-purple-300/50 focus:outline-none focus:border-fuchsia-400/70 mt-4 font-medium" 
+              className="w-full min-w-0 box-border bg-purple-950/60 border border-purple-500/40 rounded-xl p-4 text-sm text-white placeholder-purple-300/50 focus:outline-none focus:border-fuchsia-400/70 mt-4 font-medium" 
               placeholder="Type description or add landmark details in Pune..."
               value={evidence.text}
               onChange={(e) => setEvidence({ ...evidence, text: e.target.value })}
@@ -260,7 +291,7 @@ export default function ReportPage() {
             />
           </div>
 
-          <div className="flex justify-end mt-6">
+          <div className="flex justify-end mt-6 w-full">
             <GlowButton variant="fuchsia" size="lg" onClick={handleNext} className="w-full sm:w-auto font-bold text-base">
               Continue to Location →
             </GlowButton>
@@ -270,28 +301,28 @@ export default function ReportPage() {
 
       {/* STEP 2: LOCATION (LIVE HTML5 GPS / PUNE DEFAULT) */}
       {step === 2 && (
-        <div className="space-y-6 animate-[fadeIn_0.3s_ease-out]">
-          <h2 className="text-lg font-extrabold text-fuchsia-200">Step 2: Incident Location</h2>
-          <GlassCard padding="lg" glowColor="purple" className="flex flex-col items-center justify-center text-center min-h-[280px] border-purple-500/40">
+        <div className="space-y-6 w-full animate-[fadeIn_0.3s_ease-out]">
+          <h2 className="text-base sm:text-lg font-extrabold text-fuchsia-200">Step 2: Incident Location</h2>
+          <GlassCard padding="lg" glowColor="purple" className="flex flex-col items-center justify-center text-center min-h-[280px] border-purple-500/40 w-full bg-[#0d021a]/90">
             {location ? (
-              <div className="space-y-4">
+              <div className="space-y-4 w-full">
                 <div className="w-16 h-16 bg-gradient-to-tr from-purple-600 to-fuchsia-500 rounded-full flex items-center justify-center mx-auto text-3xl shadow-[0_0_25px_rgba(217,70,239,0.6)] border border-fuchsia-300/50">
                   📍
                 </div>
-                <div className="font-mono text-xl font-black text-fuchsia-200">
+                <div className="font-mono text-lg sm:text-xl font-black text-fuchsia-200">
                   {location.lat.toFixed(5)}, {location.lng.toFixed(5)}
                 </div>
-                <div className="text-sm font-semibold text-purple-100 max-w-sm">{location.address}</div>
+                <div className="text-sm font-semibold text-purple-100 max-w-sm mx-auto">{location.address}</div>
                 <span className="inline-block text-xs font-mono font-bold text-emerald-300 bg-emerald-950/60 px-3.5 py-1.5 rounded-full border border-emerald-400/40">
                   ✓ Pune Municipal PostGIS Boundary Locked
                 </span>
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-4 w-full">
                 <div className="w-16 h-16 bg-purple-950/70 rounded-full flex items-center justify-center mx-auto text-3xl border border-purple-500/40">
                   📍
                 </div>
-                <p className="text-sm text-purple-200 font-medium max-w-xs">
+                <p className="text-sm text-purple-200 font-medium max-w-xs mx-auto">
                   Acquire high-precision coordinates for automated Pune Municipal ward routing.
                 </p>
                 <GlowButton variant="fuchsia" size="md" onClick={handleGetLocation} className="font-bold text-sm">
@@ -305,11 +336,11 @@ export default function ReportPage() {
               placeholder="Or enter landmark/street address in Pune..." 
               value={location?.address || ''}
               onChange={(e) => setLocation({ lat: location?.lat || PUNE_DEFAULT.lat, lng: location?.lng || PUNE_DEFAULT.lng, address: e.target.value })}
-              className="w-full max-w-sm bg-purple-950/60 border border-purple-500/40 rounded-xl p-3.5 text-sm text-white mt-6 focus:outline-none focus:border-fuchsia-400/70 placeholder-purple-300/50"
+              className="w-full max-w-sm min-w-0 box-border bg-purple-950/60 border border-purple-500/40 rounded-xl p-3.5 text-sm text-white mt-6 focus:outline-none focus:border-fuchsia-400/70 placeholder-purple-300/50"
             />
           </GlassCard>
 
-          <div className="flex justify-between mt-6">
+          <div className="flex justify-between mt-6 w-full">
             <GlowButton variant="outline" size="md" onClick={handlePrev} className="font-bold">Back</GlowButton>
             <GlowButton variant="fuchsia" size="md" onClick={handleNext} disabled={!location} className="font-bold">
               Continue to Category →
@@ -320,9 +351,9 @@ export default function ReportPage() {
 
       {/* STEP 3: CATEGORY & SEVERITY */}
       {step === 3 && (
-        <div className="space-y-6 animate-[fadeIn_0.3s_ease-out]">
-          <h2 className="text-lg font-extrabold text-fuchsia-200">Step 3: Issue Classification</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <div className="space-y-6 w-full animate-[fadeIn_0.3s_ease-out]">
+          <h2 className="text-base sm:text-lg font-extrabold text-fuchsia-200">Step 3: Issue Classification</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 w-full">
             {categories.map(cat => (
               <GlassCard 
                 key={cat.id} 
@@ -346,7 +377,7 @@ export default function ReportPage() {
             ))}
           </div>
 
-          <GlassCard padding="md" glowColor="purple" className="mt-6 border-purple-500/40">
+          <GlassCard padding="md" glowColor="purple" className="mt-6 border-purple-500/40 w-full bg-[#0d021a]/90">
             <div className="flex justify-between items-center mb-3">
               <h3 className="text-sm text-purple-100 font-bold uppercase tracking-wider">Citizen Severity Assessment</h3>
               <span className="font-mono text-base font-black text-fuchsia-200">{details.severity} / 5</span>
@@ -365,7 +396,7 @@ export default function ReportPage() {
             </div>
           </GlassCard>
 
-          <div className="flex justify-between mt-6">
+          <div className="flex justify-between mt-6 w-full">
             <GlowButton variant="outline" size="md" onClick={handlePrev} className="font-bold">Back</GlowButton>
             <GlowButton variant="fuchsia" size="md" onClick={handleNext} disabled={!details.category} className="font-bold">
               Review Complaint →
@@ -376,9 +407,9 @@ export default function ReportPage() {
 
       {/* STEP 4: REVIEW & FAST INTAKE DISPATCH */}
       {step === 4 && (
-        <div className="space-y-6 animate-[fadeIn_0.3s_ease-out]">
-          <h2 className="text-lg font-extrabold text-fuchsia-200">Step 4: Review & Submit</h2>
-          <GlassCard padding="md" glowColor="fuchsia" className="space-y-4 border-purple-500/50">
+        <div className="space-y-6 w-full animate-[fadeIn_0.3s_ease-out]">
+          <h2 className="text-base sm:text-lg font-extrabold text-fuchsia-200">Step 4: Review & Submit</h2>
+          <GlassCard padding="md" glowColor="fuchsia" className="space-y-4 border-purple-500/50 w-full bg-[#0d021a]/90">
             <div className="flex justify-between items-center py-2.5 border-b border-purple-500/30 text-sm">
               <span className="text-purple-200 font-medium">Category</span>
               <span className="font-bold text-white text-base">{categories.find(c => c.id === details.category)?.label}</span>
@@ -389,7 +420,7 @@ export default function ReportPage() {
             </div>
             <div className="flex justify-between items-center py-2.5 border-b border-purple-500/30 text-sm">
               <span className="text-purple-200 font-medium">Attached Evidence</span>
-              <span className="font-bold font-mono text-fuchsia-200">
+              <span className="font-bold font-mono text-fuchsia-200 truncate max-w-[200px] sm:max-w-xs">
                 {evidence.file 
                   ? (evidence.isPdf ? `📄 PDF (${evidence.file.name})` : `🖼️ Photo (${evidence.file.name})`)
                   : evidence.audio 
@@ -407,7 +438,7 @@ export default function ReportPage() {
             </div>
           </GlassCard>
           
-          <div className="flex justify-between mt-6">
+          <div className="flex justify-between mt-6 w-full">
             <GlowButton variant="outline" size="md" onClick={handlePrev} className="font-bold">Back</GlowButton>
             <GlowButton variant="fuchsia" size="lg" onClick={handleSubmit} loading={isSubmitting} className="font-extrabold px-8 text-base">
               🚀 Submit Civic Complaint
